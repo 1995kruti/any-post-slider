@@ -7,6 +7,7 @@ wp-content/*
 !wp-content/mu-plugins/
 !wp-content/plugins/
 !wp-content/themes/
+!wp-content/plugins/any-post-slider/any-post-slider.zip
 
 # ignore these plugins
 wp-content/plugins/hello.php
