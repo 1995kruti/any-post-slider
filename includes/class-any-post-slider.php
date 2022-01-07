@@ -262,7 +262,7 @@ class Any_Post_Slider {
 
 			$options['aps_no_post_display'] = 3;
 
-			$options['aps_post_types'] = 'posts';
+			$options['aps_post_types'] = 'post';
 
 			$options['aps_display_layout'] = 1;
 
