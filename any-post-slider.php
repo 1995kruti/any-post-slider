@@ -38,6 +38,25 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'ANY_POST_SLIDER_VERSION', '1.0.0' );
 
 /**
+ *  define ANY_POST_SLIDER_PLUGIN_DIR constant for global use
+ */
+if (!defined('ANY_POST_SLIDER_PLUGIN_DIR'))
+	define('ANY_POST_SLIDER_PLUGIN_DIR', dirname(__FILE__));
+
+/**
+ * define ANY_POST_SLIDER_PLUGIN_URL constant for global use
+ */
+if (!defined('ANY_POST_SLIDER_PLUGIN_URL'))
+    define('ANY_POST_SLIDER_PLUGIN_URL', plugin_dir_url(__FILE__));
+
+/**
+ *  define ANY_POST_SLIDER_LOG_DIR log file path
+ */
+if (!defined('ANY_POST_SLIDER_LOG_DIR')) {
+    define('ANY_POST_SLIDER_LOG_DIR', ABSPATH . 'wp-content/uploads/any-post-slider-logs/');
+}
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-any-post-slider-activator.php
  */

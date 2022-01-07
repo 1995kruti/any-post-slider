@@ -58,6 +58,24 @@ class Any_Post_Slider {
 	protected $version;
 
 	/**
+	 * The settings of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      array    $options    The settings of the plugin.
+	 */
+	protected $options;
+
+	/**
+	 * The list of all post type
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      array    $aps_post_types    The settings of the plugin.
+	 */
+	protected $aps_post_types;
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -74,11 +92,14 @@ class Any_Post_Slider {
 		}
 		$this->plugin_name = 'any-post-slider';
 
+		$this->options[] = $this->aps_get_options();
+		$this->aps_post_types[] = $this->aps_get_all_post_type();
+
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
+		$this->aps_set_default_settings();
 	}
 
 	/**
@@ -156,6 +177,8 @@ class Any_Post_Slider {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin,'anypostslider_add_submenu');
+		$this->loader->add_action(	'admin_post_aps_update_settings',$plugin_admin,'anypostslider_update_settings');
 
 	}
 
@@ -173,7 +196,7 @@ class Any_Post_Slider {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
-	}
+	}	
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
@@ -213,6 +236,54 @@ class Any_Post_Slider {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * Retrive the settings of the plugin
+	 * 
+	 * @since     1.0.0
+	 * @return    string    The version number of the plugin.
+	 */
+	public function aps_get_options() {
+		$options = get_option('anypostslider_options');
+		return $options;
+	}
+
+	/**
+	 * Set the default settings of the plugin
+	 * 
+	 * @since     1.0.0
+	 * @return    string    The version number of the plugin.
+	 */
+	public function aps_set_default_settings() {
+		//Pull from WP options database table
+		$options = get_option('anypostslider_options');
+		if (!is_array($options)) {
+
+			$options['aps_no_post_display'] = 3;
+
+			$options['aps_post_types'] = 'posts';
+
+			$options['aps_display_layout'] = 1;
+
+			$options['aps_order_by'] = 'ASC';
+			
+			update_option('anypostslider_options', $options);
+		}
+		return $options;
+	}
+
+	/**
+	 * Get all post types of wordpress
+	 * 
+	 * @since     1.0.0
+	 * @return    string    The version number of the plugin.
+	 */
+	
+	public function aps_get_all_post_type() {
+		$aps_post_types	   = get_post_types(array( '_builtin' => false ));
+		$aps_post_types['post']  = 'post';
+		return $aps_post_types;
 	}
 
 }

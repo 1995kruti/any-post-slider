@@ -100,4 +100,56 @@ class Any_Post_Slider_Admin {
 
 	}
 
+	/**
+	 * Create action for the submenu page
+	 *
+	 * @since    1.0.0
+	 */
+	public function anypostslider_add_submenu () {
+		add_submenu_page( 'options-general.php', 'Any Post Slider options', 'Any Post Slider', 'edit_theme_options', basename(__FILE__), array($this, 'anypostslider_display_submenu_page'),99);
+	}
+
+	/**
+	 * Admin settings submenu page
+	 *
+	 * @since    1.0.0
+	 */
+	public static function anypostslider_display_submenu_page() {
+		include ANY_POST_SLIDER_PLUGIN_DIR.'/admin/partials/any-post-slider-admin-display.php';
+	}
+
+	/**
+	 * Update admin settings
+	 * 
+	 * @since    1.0.0
+	 */
+	public function anypostslider_update_settings() {
+		$status = 'false';
+		if(isset($_POST['aps_settings_save']) && 
+			( isset ($_POST['action']) == "aps_update_settings") &&
+			( isset( $_POST['anypostlsider_admin_options_nonce_field'] ) &&
+				wp_verify_nonce( $_POST['anypostlsider_admin_options_nonce_field'] ) && 
+				current_user_can('manage_options')
+			)
+		):
+			$aps_object  = new Any_Post_Slider();
+			$aps_options = $aps_object->aps_get_options();  
+
+			$aps_options['aps_no_post_display'] = (int)stripslashes($_POST['aps_no_post_display']);
+
+			$aps_options['aps_post_types'] = $_POST['asp_pos_type'];
+
+			$aps_options['aps_display_layout'] = $_POST['aps_display_layout'];
+			
+			$aps_options['aps_order_by'] = $_POST['aps_post_order'];
+			
+			$response = update_option('anypostslider_options', $aps_options);
+			if($response):
+				$status = 'true';
+			endif;
+		else:
+		endif;
+		wp_redirect(admin_url('options-general.php?page=class-any-post-slider-admin.php&update-status=' . $status));
+	}
+
 }
