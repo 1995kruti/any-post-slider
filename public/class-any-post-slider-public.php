@@ -74,7 +74,7 @@ class Any_Post_Slider_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/owl.carousel.min.css', array(), $this->version, 'all' );
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/any-post-slider-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'any-post-slider-public', plugin_dir_url( __FILE__ ) . 'css/any-post-slider-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -97,8 +97,8 @@ class Any_Post_Slider_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/owl.carousel.min.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/any-post-slider-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/owl.carousel.min.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( 'any-post-slider-public', plugin_dir_url( __FILE__ ) . 'js/any-post-slider-public.js', array( 'jquery' ), $this->version, true );
 	}
 
 	public function register_aps_slider_shortcode() {
