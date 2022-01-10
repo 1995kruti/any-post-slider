@@ -283,7 +283,9 @@ class Any_Post_Slider {
 	 */
 	
 	public function aps_get_all_post_type() {
-		$aps_post_types	   = get_post_types(array('public'   => true),'names','and'); // set arguments to list out the post types
+		$aps_post_types	   = get_post_types(array('public'   => true,'_builtin' => false),'names','and'); // set arguments to list out the post types
+		
+		$aps_post_types['posts'] = 'post';
 		return $aps_post_types;
 	}
 
