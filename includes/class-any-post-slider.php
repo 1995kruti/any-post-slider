@@ -196,7 +196,9 @@ class Any_Post_Slider {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_public, 'register_aps_slider_shortcode');
+
 	}	
+
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
@@ -293,7 +295,7 @@ class Any_Post_Slider {
 	 */
 	public function aps_display_layout_options() {
 		$layout_options = array(
-			'1' => 'single frame',
+			'1' => 'Single frame',
 			'2' => 'Double frame',
 			'3' => 'Three frame'
 		);

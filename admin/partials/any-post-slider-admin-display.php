@@ -62,9 +62,9 @@
                 </select>
             </p>
         </div>
-        <div class="aps_current_short_code">
-            <input type="text" size="100" readonly name="aps_shortcode" id="aps_shortcode_id" value="<?php  esc_attr_e($default_shortcode,$text_domain);  ?>" />
-        </div>
         <p><input class="button-primary" type="submit" name="aps_settings_save" value="Save Changes" /></p>
     </form>
+    <div class="aps_current_short_code">
+        <input type="text" size="100" readonly name="aps_shortcode" id="aps_shortcode_id" value="<?php  esc_attr_e($default_shortcode,$text_domain);  ?>" disabled/>
+    </div>
 </div>
