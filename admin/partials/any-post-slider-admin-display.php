@@ -16,6 +16,8 @@
  $text_domain           = $aps_object->get_plugin_name();
  $aps_options           = $aps_object->aps_get_options();  
  $aps_get_all_post_type = $aps_object->aps_get_all_post_type();
+ $layout_option         = $aps_object->aps_display_layout_options();
+ $default_shortcode     = "[aps_slider post_type=".$aps_options['aps_post_types']." post_count=".$aps_options['aps_no_post_display']." display_layout=".$layout_option[$aps_options['aps_display_layout']]." display_order=".$aps_options['aps_order_by']."]";
 
 ?>
 
@@ -39,7 +41,7 @@
                 foreach($aps_get_all_post_type as $pos_type_key => $pos_type_val): 
                     $post_type_obj = get_post_type_object( $pos_type_val );
                 ?>
-                <input type="radio" name="asp_pos_type" id="<?php echo $pos_type_key;?>" value="<?php esc_attr_e( $pos_type_val, $text_domain ); ?>" <?php if($aps_options['aps_post_types'] == $pos_type_val){ esc_attr_e( 'checked', $text_domain ); }?>/><label for="<?php echo $pos_type_key;?>"> <?php esc_attr_e( $post_type_obj->labels->name, $text_domain ); ?></label>
+                <input type="radio" name="aps_pos_type" id="<?php echo $pos_type_key;?>" value="<?php esc_attr_e( $pos_type_val, $text_domain ); ?>" <?php if($aps_options['aps_post_types'] == $pos_type_val){ esc_attr_e( 'checked', $text_domain ); }?>/><label for="<?php echo $pos_type_key;?>"> <?php esc_attr_e( $post_type_obj->labels->name, $text_domain ); ?></label>
                 <?php endforeach; ?>
             </p>	
         </div>
@@ -59,6 +61,9 @@
                     <option value="DESC" <?php if($aps_options['aps_order_by'] == 'DESC'){ esc_attr_e( 'selected', $text_domain ); }?> ><?php esc_attr_e( 'DESC', $text_domain ); ?></option>
                 </select>
             </p>
+        </div>
+        <div class="aps_current_short_code">
+            <input type="text" size="100" readonly name="aps_shortcode" id="aps_shortcode_id" value="<?php  esc_attr_e($default_shortcode,$text_domain);  ?>" />
         </div>
         <p><input class="button-primary" type="submit" name="aps_settings_save" value="Save Changes" /></p>
     </form>

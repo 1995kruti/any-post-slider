@@ -28,5 +28,28 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+	 $('#aps_slider').owlCarousel({
+		loop:true,
+		margin:10,
+		responsiveClass:true,
+		nav:true,
+		URLhashListener:true,
+		startPosition: 'URLHash',
+		responsive:{
+			0:{
+				items:1,
+				nav:true
+			},
+			600:{
+				items:3,
+				nav:false
+			},
+			1000:{
+				items:3,
+				nav:true,
+				loop:false
+			}
+		}
+	})
 
 })( jQuery );

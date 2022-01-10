@@ -178,7 +178,7 @@ class Any_Post_Slider {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin,'anypostslider_add_submenu');
-		$this->loader->add_action(	'admin_post_aps_update_settings',$plugin_admin,'anypostslider_update_settings');
+		$this->loader->add_action( 'admin_post_aps_update_settings',$plugin_admin,'anypostslider_update_settings');
 
 	}
 
@@ -195,7 +195,7 @@ class Any_Post_Slider {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
+		$this->loader->add_action( 'init', $plugin_public, 'register_aps_slider_shortcode');
 	}	
 
 	/**
@@ -242,10 +242,10 @@ class Any_Post_Slider {
 	 * Retrive the settings of the plugin
 	 * 
 	 * @since     1.0.0
-	 * @return    string    The version number of the plugin.
+	 * @return    array    The settings of the plugin.
 	 */
 	public function aps_get_options() {
-		$options = get_option('anypostslider_options');
+		$options = get_option('anypostslider_options'); // get plugins settings from database
 		return $options;
 	}
 
@@ -253,7 +253,7 @@ class Any_Post_Slider {
 	 * Set the default settings of the plugin
 	 * 
 	 * @since     1.0.0
-	 * @return    string    The version number of the plugin.
+	 * @return    array    The array of plugins settings.
 	 */
 	public function aps_set_default_settings() {
 		//Pull from WP options database table
@@ -266,7 +266,7 @@ class Any_Post_Slider {
 
 			$options['aps_display_layout'] = 1;
 
-			$options['aps_order_by'] = 'ASC';
+			$options['aps_order_by'] = 'DESC';
 			
 			update_option('anypostslider_options', $options);
 		}
@@ -277,13 +277,27 @@ class Any_Post_Slider {
 	 * Get all post types of wordpress
 	 * 
 	 * @since     1.0.0
-	 * @return    string    The version number of the plugin.
+	 * @return    array   The list of post types.
 	 */
 	
 	public function aps_get_all_post_type() {
-		$aps_post_types	   = get_post_types(array( '_builtin' => false ));
-		$aps_post_types['post']  = 'post';
+		$aps_post_types	   = get_post_types(array('public'   => true),'names','and'); // set arguments to list out the post types
 		return $aps_post_types;
+	}
+
+	/**
+	 * Default layout options
+	 * 
+	 * @since     1.0.0
+	 * @return    array    The layout options array.
+	 */
+	public function aps_display_layout_options() {
+		$layout_options = array(
+			'1' => 'single frame',
+			'2' => 'Double frame',
+			'3' => 'Three frame'
+		);
+		return $layout_options;
 	}
 
 }

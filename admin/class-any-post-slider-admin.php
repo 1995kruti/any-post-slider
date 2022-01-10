@@ -41,6 +41,15 @@ class Any_Post_Slider_Admin {
 	private $version;
 
 	/**
+	 * The layout option of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $layout_options    The current layout_option of this plugin.
+	 */
+	private $layout_options;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -106,7 +115,7 @@ class Any_Post_Slider_Admin {
 	 * @since    1.0.0
 	 */
 	public function anypostslider_add_submenu () {
-		add_submenu_page( 'options-general.php', 'Any Post Slider options', 'Any Post Slider', 'edit_theme_options', basename(__FILE__), array($this, 'anypostslider_display_submenu_page'),99);
+		add_submenu_page( 'options-general.php', 'Any Post Slider options', 'Any Post Slider', 'manage_options', 'any-post-slider-settings' , array($this, 'anypostslider_display_submenu_page'),99);
 	}
 
 	/**
@@ -137,7 +146,7 @@ class Any_Post_Slider_Admin {
 
 			$aps_options['aps_no_post_display'] = (int)stripslashes($_POST['aps_no_post_display']);
 
-			$aps_options['aps_post_types'] = $_POST['asp_pos_type'];
+			$aps_options['aps_post_types'] = $_POST['aps_pos_type'];
 
 			$aps_options['aps_display_layout'] = $_POST['aps_display_layout'];
 			
@@ -149,7 +158,6 @@ class Any_Post_Slider_Admin {
 			endif;
 		else:
 		endif;
-		wp_redirect(admin_url('options-general.php?page=class-any-post-slider-admin.php&update-status=' . $status));
+		wp_redirect(admin_url('options-general.php?page=any-post-slider-settings&update-status=' . $status));
 	}
-
 }
