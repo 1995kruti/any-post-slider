@@ -2,3 +2,24 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+ 
+ .aps_current_short_code {
+     margin-bottom: 10px;
+ }
+ .aps-current-short-code-wrap {
+     display: flex;
+ }
+ img.aps-copy-to-clip {
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+ }
+
+ .aps-text-copied-msg {
+     background: #5198d1ed;
+     color: #fff;
+     padding: 5px;
+     border: 1px;
+     border-color: #ffffff;
+     border-radius: 3px;
+ }

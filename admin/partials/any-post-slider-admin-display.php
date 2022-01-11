@@ -32,7 +32,7 @@
         <?php endif; ?>
         <div class="fl_box">
             <p>Display Posts:</p>
-            <p><input type="number" maxlength="6" name="aps_no_post_display" value="<?php esc_attr_e($aps_options['aps_no_post_display'],$text_domain); ?>" /></p>
+            <p><input type="number" maxlength="2" min="-1" max="50" name="aps_no_post_display" value="<?php esc_attr_e($aps_options['aps_no_post_display'],$text_domain); ?>" /></p>
         </div>
         <div class="fl_box">
             <p>Select Post Types:</p>
@@ -65,6 +65,11 @@
         <p><input class="button-primary" type="submit" name="aps_settings_save" value="Save Changes" /></p>
     </form>
     <div class="aps_current_short_code">
-        <input type="text" size="100" readonly name="aps_shortcode" id="aps_shortcode_id" value="<?php  esc_attr_e($default_shortcode,$text_domain);  ?>" disabled/>
+        <p>Your short code for above chosen options:</p>
+        <div class='aps-current-short-code-wrap'>
+            <input type="text" size="100" readonly name="aps_shortcode" id="aps_shortcode_id" value="<?php  esc_attr_e($default_shortcode,$text_domain);  ?>" disabled/>
+            <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'/admin/images/copy.png');?>" class="aps-copy-to-clip" id="aps_copy_to_clip_id" />
+        </div>
     </div>
 </div>
+<span class="aps-text-copied-msg" style="display:none;">Shortcode copied!</span>

@@ -29,48 +29,28 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 	var asp_layout_option = $("#display-layout-id").val();
-	var additional_param = " ";
-	if(asp_layout_option == 1){
-		additional_param = {
-			singleItem:true
-		}
-	}
 
-	if(asp_layout_option == 2){
-		additional_param = {
-			items :3,
-			itemsDesktop : [1199,2],
-			itemsDesktopSmall : [979,2]
-		}
-	}
-
-	if(asp_layout_option == 3){
-		additional_param = {
-			items : 4,
-			itemsDesktop : [1199,3],
-			itemsDesktopSmall : [979,3]
-		}
-	}
-
-
-	
 	$('#aps_slider').owlCarousel({
 		loop:true,
-		margin:10,
+		margin:5,
 		nav:true,
-		dots: true,
-		additional_param,
+		items : asp_layout_option,
+		itemsDesktop : [1199,asp_layout_option],
+		itemsDesktopSmall : [979,asp_layout_option],
+		mouseDrag: true,
+		touchDrag: true,
+		navText: ["<span>&lt;</span>", "<span>&gt;</span>"],
 		responsive:{
 			0:{
 				items:1,
 				nav:true
 			},
 			600:{
-				items:3,
+				items:asp_layout_option,
 				nav:false
 			},
 			1000:{
-				items:3,
+				items:asp_layout_option,
 				nav:true,
 				loop:false
 			}
