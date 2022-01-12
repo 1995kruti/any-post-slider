@@ -34,6 +34,7 @@
 		loop:true,
 		margin:5,
 		nav:true,
+		navClass: ['btn button owl-prev','btn button owl-next'],
 		items : asp_layout_option,
 		itemsDesktop : [1199,asp_layout_option],
 		itemsDesktopSmall : [979,asp_layout_option],

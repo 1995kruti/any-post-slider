@@ -2,3 +2,91 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+ .app-slider-wrap .aps-slider.owl-carousel {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    
+ }
+
+ .app-slider-wrap .aps-slider.owl-carousel .owl-nav .owl-prev {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-left: -55px;
+}
+
+
+.app-slider-wrap .aps-slider.owl-carousel .owl-nav .owl-next {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-right: -55px;
+}
+
+.app-slider-wrap .aps-slider.owl-carousel .owl-nav .owl-prev span, .app-slider-wrap .aps-slider.owl-carousel .owl-nav .owl-next span {
+    background: inherit !important;
+    /* border-radius: 50%; */
+    padding: 5px;
+    width: 41px;
+    height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    font-weight: bold;
+    
+}
+
+/* .app-slider-wrap .aps-slider.owl-carousel .owl-nav button.owl-next, .app-slider-wrap .aps-slider .owl-carousel .owl-nav button.owl-prev, .owl-carousel button.owl-dot {
+    background-color: inherit !important;
+    background: inherit !important;
+} */
+
+.app-slider-wrap .aps-slider.owl-carousel .owl-nav .owl-prev, .app-slider-wrap .aps-slider .owl-nav .owl-next {
+    outline: none;
+    border: 1px grey solid;
+    text-decoration: none;
+}
+
+.app-slider-wrap .aps-slider.owl-carousel .owl-nav .owl-prev:hover, .app-slider-wrap .aps-slider .owl-nav .owl-next:hover {
+    background-color: unset;
+    background: gray;
+    text-decoration: none;
+}
+
+.app-slider-wrap .aps-slider.owl-carousel .owl-nav .owl-prev.disabled , .app-slider-wrap .aps-slider .owl-nav .owl-next.disabled  {
+    cursor:not-allowed;
+}
+
+.app-slider-wrap .aps-slider.owl-carousel .button,.app-slider-wrap .aps-slider a {
+    text-decoration: none;
+}
+
+.app-slider-wrap .aps-slider.owl-carousel .owl-dots {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.app-slider-wrap .aps-slider.owl-carousel .owl-dots button.owl-dot span {
+    background: inherit;
+    padding: 3px;
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.app-slider-wrap .aps-slider.owl-carousel .owl-dots button.owl-dot span {
+    background: #ffffff;
+    border: 1px #000000 solid;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.app-slider-wrap .aps-slider.owl-carousel .owl-dots button.owl-dot.active span {
+    background: grey;
+}
+
+

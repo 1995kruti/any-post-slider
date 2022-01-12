@@ -74,7 +74,7 @@ class Any_Post_Slider_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/owl.carousel.min.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'any-post-slider-public', plugin_dir_url( __FILE__ ) . 'css/any-post-slider-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'any-post-slider-public', plugin_dir_url( __FILE__ ) . 'css/any-post-slider-public.css', array(), $this->version,'all' );
 
 	}
 

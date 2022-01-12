@@ -45,18 +45,26 @@ if(isset($get_posts_data) && !is_admin()):
 // ob_start();
 
 ?>
-<input type="hidden" class="display-layout" id="display-layout-id" value="<?php esc_attr_e(  $aps_carousal_arguments['display_layout'], $text_domain )?>"/>
-<div class="owl-carousel owl-theme aps-slider" id="aps_slider">
-    <?php foreach($get_posts_data as $post_item_key => $post_item_val): ?>
-    <div class="item" data-hash="<?php esc_attr_e($post_item_val->ID); ?>">
-        <?php _e(get_the_post_thumbnail( $post_item_val->ID, 'large', array( 'class' => 'alignleft' ) )); ?>
-        <h4><?php esc_html_e( $post_item_val->post_title, $text_domain); ?></h4>
-        <?php if(has_excerpt($post_item_val->ID)): ?>
-        <p><?php $excerpt = substr(get_the_excerpt($post_item_val->ID), 0, 100); _e($excerpt." ..."); ?></p>
-        <?php endif; ?>
-        <a href="<?php echo esc_url(get_the_permalink($post_item_val->ID)); ?>"><?php esc_attr_e("Read More",$text_domain); ?></a>
+<div class="app-slider-wrap">
+    <input type="hidden" class="display-layout" id="display-layout-id" value="<?php esc_attr_e(  $aps_carousal_arguments['display_layout'], $text_domain )?>"/>
+    <div class="owl-carousel owl-theme aps-slider" id="aps_slider">
+        <?php foreach($get_posts_data as $post_item_key => $post_item_val): ?>
+        <div class="item" data-hash="<?php esc_attr_e($post_item_val->ID); ?>">
+            <?php _e(get_the_post_thumbnail( $post_item_val->ID, 'large' )); ?>
+            <a href="<?php echo esc_url(get_the_permalink($post_item_val->ID)); ?>">
+            <h4><?php esc_html_e( $post_item_val->post_title, $text_domain); ?></h4>
+            </a>
+            <?php if(has_excerpt($post_item_val->ID)): ?>
+            <?php $excerpt = substr(get_the_excerpt($post_item_val->ID), 0, 100); _e($excerpt); ?>
+            <?php endif; ?>
+            <a href="<?php echo esc_url(get_the_permalink($post_item_val->ID)); ?>">
+                <span class="btn button">
+                    <?php esc_attr_e("Read More",$text_domain); ?>
+                </span>
+            </a>
+        </div>
+        <?php endforeach; ?>
     </div>
-    <?php endforeach; ?>
 </div>
 <?php
 // ob_end_flush();
