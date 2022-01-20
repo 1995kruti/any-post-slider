@@ -125,7 +125,7 @@ class Any_Post_Slider_Public {
 	/**
 	 * Added shorcode for the public-facing side of the site.
 	 *
-	 * @since    1.0.1
+	 * @since    1.0.0
 	 */
 	public function aps_slider_shortcode($aps_attributes) {	
 		ob_start();
