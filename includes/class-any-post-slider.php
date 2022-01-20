@@ -179,6 +179,7 @@ class Any_Post_Slider {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin,'anypostslider_add_submenu');
 		$this->loader->add_action( 'admin_post_aps_update_settings',$plugin_admin,'anypostslider_update_settings');
+		$this->loader->add_filter( 'plugin_action_links_'.$this->plugin_name.'/'.$this->plugin_name.'.php',$plugin_admin,'aps_settings_link',10,1 );
 
 	}
 
@@ -196,7 +197,6 @@ class Any_Post_Slider {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_public, 'register_aps_slider_shortcode');
-
 	}	
 
 
@@ -262,13 +262,15 @@ class Any_Post_Slider {
 		$options = get_option('anypostslider_options');
 		if (!is_array($options)) {
 
-			$options['aps_no_post_display'] = 3;
+			$options['aps_no_post_display'] = 10;
 
 			$options['aps_post_types'] = 'post';
 
 			$options['aps_display_layout'] = 1;
 
 			$options['aps_order_by'] = 'DESC';
+
+			$options['aps_scroll_to_slide'] = 1;
 			
 			update_option('anypostslider_options', $options);
 		}
@@ -297,11 +299,10 @@ class Any_Post_Slider {
 	 */
 	public function aps_display_layout_options() {
 		$layout_options = array(
-			'1' => 'Single frame',
-			'2' => 'Double frame',
-			'3' => 'Three frame'
+			'1' => 'One Slide',
+			'2' => 'Two Slide',
+			'3' => 'Three Slide'
 		);
 		return $layout_options;
 	}
-
 }

@@ -96,19 +96,41 @@ class Any_Post_Slider_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		
+		$options = get_option('anypostslider_options');
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/owl.carousel.min.js', array( 'jquery' ), $this->version, true );
-		wp_enqueue_script( 'any-post-slider-public', plugin_dir_url( __FILE__ ) . 'js/any-post-slider-public.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( 'any_post_slider_public', plugin_dir_url( __FILE__ ) . 'js/any-post-slider-public.js', array( 'jquery' ), $this->version, true );
+		wp_localize_script( $this->plugin_name, 'any_post_slider_public' , array( 
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'aps_image_dir' => ANY_POST_SLIDER_PLUGIN_URL.'public/images',
+			'aps_scroll_to_slide' => $options['aps_scroll_to_slide']
+			) 
+		);
+		if($options['aps_scroll_to_slide'] == true):
+			wp_enqueue_script( 'any_post_slider_public_mouse_wheel', plugin_dir_url( __FILE__ ) . 'js/jquery.mousewheel.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_script( 'any_post_slider_public_mouse_wheel_min', plugin_dir_url( __FILE__ ) . 'js/jquery.mousewheel.min.js', array( 'jquery' ), $this->version, true );
+		endif;
 	}
 
+	/**
+	 * Register the shortcode for the public-facing side of the site.
+	 *
+	 * @since    1.0.0
+	 */
 	public function register_aps_slider_shortcode() {
-		
 		add_shortcode('aps_slider', array($this, 'aps_slider_shortcode'));
 	}
 	
+	/**
+	 * Added shorcode for the public-facing side of the site.
+	 *
+	 * @since    1.0.1
+	 */
 	public function aps_slider_shortcode($aps_attributes) {	
-		
-		include ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-public-display.php';
+		ob_start();
+			require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-public-display.php');
+		return ob_get_clean();
 	}
 
 }

@@ -104,7 +104,7 @@ class Any_Post_Slider_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
+		
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/any-post-slider-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
@@ -146,11 +146,13 @@ class Any_Post_Slider_Admin {
 
 			$aps_options['aps_no_post_display'] = (int)stripslashes($_POST['aps_no_post_display']);
 
-			$aps_options['aps_post_types'] = $_POST['aps_pos_type'];
+			$aps_options['aps_post_types'] = sanitize_text_field($_POST['aps_pos_type']);
 
-			$aps_options['aps_display_layout'] = $_POST['aps_display_layout'];
+			$aps_options['aps_display_layout'] = (int)stripslashes($_POST['aps_display_layout']);
 			
-			$aps_options['aps_order_by'] = $_POST['aps_post_order'];
+			$aps_options['aps_order_by'] = sanitize_text_field($_POST['aps_post_order']);
+
+			$aps_options['aps_scroll_to_slide'] = (int)stripslashes($_POST['aps_scroll_to_slide']);
 			
 			$response = update_option('anypostslider_options', $aps_options);
 			if($response):
@@ -160,4 +162,17 @@ class Any_Post_Slider_Admin {
 		endif;
 		wp_redirect(admin_url('options-general.php?page=any-post-slider-settings&update-status=' . $status));
 	}
+	
+	/**
+	 * Plugin settings link
+	 * 
+	 * @since    1.0.0
+	 */
+	public function aps_settings_link( array $links ) {
+		$url = get_admin_url() . "options-general.php?page=any-post-slider-settings";
+		$settings_link = '<a href="' . $url . '">' . __('Settings', 'textdomain') . '</a>';
+		  $links[] = $settings_link;
+		return $links;
+	}
+	
 }

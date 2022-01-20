@@ -28,9 +28,12 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+	var image_dir_url = any_post_slider_public.aps_image_dir;
+	var aps_scroll_to_slide = any_post_slider_public.aps_scroll_to_slide;
 	var asp_layout_option = $("#display-layout-id").val();
+	var aps_owl_slider = $('#aps_slider');
 
-	$('#aps_slider').owlCarousel({
+	aps_owl_slider.owlCarousel({
 		loop:true,
 		margin:5,
 		nav:true,
@@ -40,7 +43,7 @@
 		itemsDesktopSmall : [979,asp_layout_option],
 		mouseDrag: true,
 		touchDrag: true,
-		navText: ["<span>&lt;</span>", "<span>&gt;</span>"],
+		navText: ["<span><img src="+image_dir_url+'/back.png;'+" /></span>", "<span><img src="+image_dir_url+'/next.png;'+" /></span>"],
 		responsive:{
 			0:{
 				items:1,
@@ -56,7 +59,21 @@
 				loop:false
 			}
 		}
-	})
+	});
 	
+	// add slide effect on scroll if aps_scroll_to_slide enabled from settings
+	if(aps_scroll_to_slide == 1){
+		aps_owl_slider.on('mousewheel', '.owl-stage', function (e) {
+				
+				
+				if (e.originalEvent.deltaY>0) {
+					aps_owl_slider.trigger('next.owl');
+				} else {
+					aps_owl_slider.trigger('prev.owl');
+				}
+				e.preventDefault();
+			
+		});
+	}
 
 })( jQuery );

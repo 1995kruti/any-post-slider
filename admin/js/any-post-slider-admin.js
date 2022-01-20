@@ -39,6 +39,15 @@
 			$('.aps-text-copied-msg').fadeIn(1000);
 			$('.aps-text-copied-msg').fadeOut(1000);
 		 });
+		 $(".aps-layout-opt").on("click", function () {
+			 var current_id = $(this).attr('id');
+			 $(".aps-layout-opt-img").each(function () {
+				 $(this).removeClass('active');
+				 if ($(this).data('layout') === current_id) {
+					 $(this).addClass('active');
+				 }
+			 });
+		 });
 	 });
 
 })( jQuery );

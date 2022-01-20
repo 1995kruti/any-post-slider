@@ -9,6 +9,9 @@
  .aps-current-short-code-wrap {
      display: flex;
  }
+ .aps-current-short-code-wrap input:disabled {
+    color: rgb(44 51 56 / 78%);
+ }
  img.aps-copy-to-clip {
     width: 30px;
     height: auto;
@@ -22,4 +25,12 @@
      border: 1px;
      border-color: #ffffff;
      border-radius: 3px;
+ }
+
+ .aps-layout-opt-img {
+     border: 1px solid #aebab6;
+ }
+
+ .aps-layout-opt-img.active {
+    border: 1px solid #4b5451;
  }

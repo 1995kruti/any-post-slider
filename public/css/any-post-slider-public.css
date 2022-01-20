@@ -89,4 +89,15 @@
     background: grey;
 }
 
+.aps-excerpt {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
+#aps_slider .owl-dots button {
+    background-color: transparent;
+}
+
+#aps_slider .owl-dots button:focus {
+    outline: none;
+}
