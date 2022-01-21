@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: krutimodi
+Contributors: krutimodi,  jayminips
 Donate link: https://www.itpathsolutions.com/
 Tags: slider , owl carousel , scrolling , scroll to slide , post slider , custom post type slider
 Requires at least: 3.0.1
