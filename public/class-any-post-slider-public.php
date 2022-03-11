@@ -119,6 +119,7 @@ class Any_Post_Slider_Public {
 	 * @since    1.0.0
 	 */
 	public function register_aps_slider_shortcode() {
+		
 		add_shortcode('aps_slider', array($this, 'aps_slider_shortcode'));
 	}
 	

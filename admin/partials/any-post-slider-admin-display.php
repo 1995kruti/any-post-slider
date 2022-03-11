@@ -17,7 +17,7 @@
  $aps_options           = $aps_object->aps_get_options();  
  $aps_get_all_post_type = $aps_object->aps_get_all_post_type();
  $layout_option         = $aps_object->aps_display_layout_options();
- $default_shortcode     = "[aps_slider post_type=".$aps_options['aps_post_types']." post_count=".$aps_options['aps_no_post_display']." display_layout=".$layout_option[$aps_options['aps_display_layout']]." display_order=".$aps_options['aps_order_by']."]";
+ $default_shortcode     = "[aps_slider post_type=".$aps_options['aps_post_types']." post_count=".$aps_options['aps_no_post_display']." display_layout=".$layout_option[$aps_options['aps_display_layout']]." display_order=".$aps_options['aps_order_by']." ]";
 
 ?>
 
@@ -31,11 +31,11 @@
             <div class="notice notice-success is-dismissible"><p><?php _e('Settings save successfully!'); ?>.</p></div>
         <?php endif; ?>
         <div class="fl_box">
-            <p><h3>Display Posts:</strong></h3>
+            <p><h6>Display Posts:</strong></h6>
             <p><input type="number" maxlength="2" min="-1" max="50" name="aps_no_post_display" value="<?php esc_attr_e($aps_options['aps_no_post_display'],$text_domain); ?>" /></p>
         </div>
         <div class="fl_box">
-            <p><h3>Select Post Types:</h3></p>
+            <p><h6>Select Post Types:</h6></p>
             <p>
                 <?php 
                 foreach($aps_get_all_post_type as $pos_type_key => $pos_type_val): 
@@ -46,26 +46,35 @@
             </p>	
         </div>
         <div class="fl_box">
-            <p><h3>Select Display Layout:</h3></p>
+            <p><h6>Select Display Layout:</h6></p>
             <p>
                 <span>
-                    <label for="<?php esc_attr_e('layout_1',$text_domain);?>"> <input type="radio" class="aps-layout-opt" name="aps_display_layout" id="layout_1" value="<?php esc_attr_e( '1', $text_domain ); ?>" <?php if($aps_options['aps_display_layout'] == '1'){ _e("checked");}?> /><?php esc_attr_e( 'Single Slide', $text_domain ); ?></label>
+                    <label for="<?php esc_attr_e('layout_1',$text_domain);?>"> 
+                        <input type="radio" class="aps-layout-opt" name="aps_display_layout" id="layout_1" value="<?php esc_attr_e( '1', $text_domain ); ?>" <?php if($aps_options['aps_display_layout'] == '1'){ _e("checked");}?> />
+                        <?php //esc_attr_e( 'Single Slide', $text_domain ); ?>
+                        <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'admin/images/one_slide.png'); ?>" class="aps-layout-opt-img <?php if($aps_options['aps_display_layout'] == '1'){ _e("active");}?>" data-layout="layout_1" />
+                    </label>
                 </span>
                 <span>
-                    <label for="<?php esc_attr_e('layout_2',$text_domain);?>"> <input type="radio" class="aps-layout-opt" name="aps_display_layout" id="layout_2" value="<?php esc_attr_e( '2', $text_domain ); ?>" <?php if($aps_options['aps_display_layout'] == '2'){ _e("checked");}?>/><?php esc_attr_e( 'Two Slide', $text_domain ); ?></label>
+                    <label for="<?php esc_attr_e('layout_2',$text_domain);?>"> 
+                        <input type="radio" class="aps-layout-opt" name="aps_display_layout" id="layout_2" value="<?php esc_attr_e( '2', $text_domain ); ?>" <?php if($aps_options['aps_display_layout'] == '2'){ _e("checked");}?>/>
+                        <?php //esc_attr_e( 'Two Slide', $text_domain ); ?>
+                        <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'admin/images/two_slide.png'); ?>" class="aps-layout-opt-img <?php if($aps_options['aps_display_layout'] == '2'){ _e("active");}?>" data-layout="layout_2" />
+                    </label>
                 </span>
                 <span>
-                    <label for="<?php esc_attr_e('layout_3',$text_domain);?>"> <input type="radio" class="aps-layout-opt" name="aps_display_layout" id="layout_3" value="<?php esc_attr_e( '3', $text_domain ); ?>" <?php if($aps_options['aps_display_layout'] == '3'){ _e("checked");}?>/><?php esc_attr_e( 'Three Slide', $text_domain ); ?> </label>
+                    <label for="<?php esc_attr_e('layout_3',$text_domain);?>"> 
+                        <input type="radio" class="aps-layout-opt" name="aps_display_layout" id="layout_3" value="<?php esc_attr_e( '3', $text_domain ); ?>" <?php if($aps_options['aps_display_layout'] == '3'){ _e("checked");}?>/>
+                        <?php //esc_attr_e( 'Three Slide', $text_domain ); ?> 
+                        <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'admin/images/three_slide.png'); ?>" class="aps-layout-opt-img <?php if($aps_options['aps_display_layout'] == '3'){ _e("active");}?>" data-layout="layout_3" />
+                    </label>
                 </span>
             </p>
             <p>
-                <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'admin/images/one_slide.png'); ?>" class="aps-layout-opt-img <?php if($aps_options['aps_display_layout'] == '1'){ _e("active");}?>" data-layout="layout_1" />
-                <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'admin/images/two_slide.png'); ?>" class="aps-layout-opt-img <?php if($aps_options['aps_display_layout'] == '2'){ _e("active");}?>" data-layout="layout_2" />
-                <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'admin/images/three_slide.png'); ?>" class="aps-layout-opt-img <?php if($aps_options['aps_display_layout'] == '3'){ _e("active");}?>" data-layout="layout_3" />
             </p>
         </div>
         <div class="fl_box">
-            <p><h3>Select Order:</h3></p>
+            <p><h6>Select Order:</h6></p>
             <p>
                 <select id="aps_post_order" name="aps_post_order">
                     <option value="ASC" <?php if($aps_options['aps_order_by'] == 'ASC'){ esc_attr_e( 'selected', $text_domain ); }?> ><?php esc_attr_e( 'ASC', $text_domain ); ?></option>
@@ -74,7 +83,7 @@
             </p>
         </div>
         <div class="fl_box">
-            <p><h3>Scroll to Slide:</h3></p>
+            <p><h6>Scroll to Slide:</h6></p>
             <p>
                 <select id="aps_scroll_to_slide" name="aps_scroll_to_slide">
                     <option value="1" <?php if($aps_options['aps_scroll_to_slide'] == '1'){ esc_attr_e( 'selected', $text_domain ); }?> ><?php esc_attr_e( 'Yes', $text_domain ); ?></option>
@@ -82,10 +91,17 @@
                 </select>
             </p>
         </div>
+        <div class="fl_box">
+            <p><h6>Select Slide to Display:</h6></p>
+            <p>
+            <p>
+                <input type="number" maxlength="6" min="1" max="6" name="aps_no_slide_display" value="<?php esc_attr_e($aps_options['aps_no_slide_display'],$text_domain); ?>" />
+            </p>
+        </div>
         <p><input class="button-primary" type="submit" name="aps_settings_save" value="Save Changes" /></p>
     </form>
     <div class="aps_current_short_code">
-        <p><h3>Your short code for above chosen options:</h3></p>
+        <p><h6>Your short code for above chosen options:</h6></p>
         <div class='aps-current-short-code-wrap'>
             <input type="text" size="100" readonly name="aps_shortcode" id="aps_shortcode_id" value="<?php  esc_attr_e($default_shortcode,$text_domain);  ?>" disabled/>
             <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'/admin/images/copy.png');?>" class="aps-copy-to-clip" id="aps_copy_to_clip_id" />

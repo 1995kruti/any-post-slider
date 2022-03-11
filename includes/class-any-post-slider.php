@@ -271,6 +271,10 @@ class Any_Post_Slider {
 			$options['aps_order_by'] = 'DESC';
 
 			$options['aps_scroll_to_slide'] = 1;
+
+			$options['aps_no_slide_display'] = 3;
+
+			
 			
 			update_option('anypostslider_options', $options);
 		}

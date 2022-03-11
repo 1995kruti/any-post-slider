@@ -32,7 +32,7 @@
 		 jQuery('#aps_copy_to_clip_id').on('click',function(){
 			var sampleTextarea = document.createElement("textarea");
 			document.body.appendChild(sampleTextarea);
-			sampleTextarea.value = jQuery('#aps_shortcode_id').val();; //save main text in it
+			sampleTextarea.value = jQuery('#aps_shortcode_id').val(); //save main text in it
 			sampleTextarea.select(); //select textarea contenrs
 			document.execCommand("copy");
 			document.body.removeChild(sampleTextarea);

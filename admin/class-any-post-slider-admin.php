@@ -81,8 +81,14 @@ class Any_Post_Slider_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		
+		if ( isset($_GET["page"]) && $_GET["page"]  == 'any-post-slider-settings'):
+		// enqueue bootstrap CSS
+		wp_enqueue_style( 'bootstrap-min-css', plugin_dir_url( __FILE__ ) . 'css/bootstrap/bootstrap.min.css', array(), $this->version, 'all' );
+		endif;
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/any-post-slider-admin.css', array(), $this->version, 'all' );
+		// enqueue slider plugin CSS
+		wp_enqueue_style( 'any-post-slider-admin', plugin_dir_url( __FILE__ ) . 'css/any-post-slider-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -105,7 +111,17 @@ class Any_Post_Slider_Admin {
 		 * class.
 		 */
 		
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/any-post-slider-admin.js', array( 'jquery' ), $this->version, false );
+		// enqueue bootstrap slim js
+		// wp_enqueue_script( 'jquery-slim-min', plugin_dir_url( __FILE__ ) . 'js/bootstrap/jquery.slim.min.js', array( 'jquery' ), $this->version, false );
+		
+		// enqueue bootstrap popper js
+		wp_enqueue_script( 'popper-min-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap/popper.min.js', array( 'jquery' ), $this->version, false );
+
+		// enqueue bootstrap popper js
+		wp_enqueue_script( 'bootstrap-min-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap/bootstrap.min.js', array( 'jquery' ), $this->version, false );
+
+		// enqueue slider plugin JS
+		wp_enqueue_script( 'any-post-slider-admin-js', plugin_dir_url( __FILE__ ) . 'js/any-post-slider-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -115,7 +131,15 @@ class Any_Post_Slider_Admin {
 	 * @since    1.0.0
 	 */
 	public function anypostslider_add_submenu () {
-		add_submenu_page( 'options-general.php', 'Any Post Slider options', 'Any Post Slider', 'manage_options', 'any-post-slider-settings' , array($this, 'anypostslider_display_submenu_page'),99);
+		add_menu_page(
+			__( 'Any Post Slider options', 'textdomain' ),
+			'Any Post Slider',
+			'manage_options',
+			'any-post-slider-settings',
+			array($this, 'anypostslider_display_submenu_page'),
+			ANY_POST_SLIDER_PLUGIN_URL.'admin/images/snowy-owl.png',
+			99
+		);
 	}
 
 	/**
@@ -153,6 +177,8 @@ class Any_Post_Slider_Admin {
 			$aps_options['aps_order_by'] = sanitize_text_field($_POST['aps_post_order']);
 
 			$aps_options['aps_scroll_to_slide'] = (int)stripslashes($_POST['aps_scroll_to_slide']);
+
+			$aps_options['aps_no_slide_display'] = (int)stripslashes($_POST['aps_no_slide_display']);
 			
 			$response = update_option('anypostslider_options', $aps_options);
 			if($response):
@@ -160,7 +186,7 @@ class Any_Post_Slider_Admin {
 			endif;
 		else:
 		endif;
-		wp_redirect(admin_url('options-general.php?page=any-post-slider-settings&update-status=' . $status));
+		wp_redirect(admin_url('admin.php?page=any-post-slider-settings&update-status=' . $status));
 	}
 	
 	/**
@@ -169,7 +195,7 @@ class Any_Post_Slider_Admin {
 	 * @since    1.0.0
 	 */
 	public function aps_settings_link( array $links ) {
-		$url = get_admin_url() . "options-general.php?page=any-post-slider-settings";
+		$url = get_admin_url() . "admin.php?page=any-post-slider-settings";
 		$settings_link = '<a href="' . $url . '">' . __('Settings', 'textdomain') . '</a>';
 		  $links[] = $settings_link;
 		return $links;
