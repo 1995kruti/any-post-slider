@@ -7,7 +7,7 @@
             <?php if(has_post_thumbnail($post_item_val->ID)): ?>
                 <?php _e(get_the_post_thumbnail( $post_item_val->ID, 'large' )); ?>
             <?php else: ?>
-                <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'public/images/place_holder.png'); ?>">
+                <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'public/images/place_holder.png'); ?>" alt="place_holder">
             <?php endif; ?>
             <?php _e(get_the_date('l F j, Y',$post_item_val->ID)); ?>
             <a href="<?php echo esc_url(get_the_permalink($post_item_val->ID)); ?>">

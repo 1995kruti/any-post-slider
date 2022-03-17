@@ -99,3 +99,9 @@ function run_any_post_slider() {
 
 }
 run_any_post_slider();
+
+
+// add_shortcode( 'apsslider', 'aps_slider_footag_func' );
+// function aps_slider_footag_func( $atts ) {
+//     return $atts['post_type'];
+// }

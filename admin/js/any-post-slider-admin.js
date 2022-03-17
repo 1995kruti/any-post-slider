@@ -48,6 +48,26 @@
 				 }
 			 });
 		 });
+		 jQuery('#aps_style').on('change', function() {
+		  	if(this.value == 1){
+			    jQuery('.aps_style_output img').hide();
+			    jQuery('.aps_style_1').show();
+			}else if(this.value == 2){
+			    jQuery('.aps_style_output img').hide();
+			    jQuery('.aps_style_2').show();
+			}else if(this.value == 3){
+			    jQuery('.aps_style_output img').hide();
+			    jQuery('.aps_style_3').show();
+			}else if(this.value == 4){
+			    jQuery('.aps_style_output img').hide();
+			    jQuery('.aps_style_4').show();
+			}else if(this.value == 5){
+			    jQuery('.aps_style_output img').hide();
+			    jQuery('.aps_style_5').show();
+			}else{
+			    jQuery('.aps_style_output img').hide();
+			}
+		});
 	 });
 
 })( jQuery );

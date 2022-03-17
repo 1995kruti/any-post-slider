@@ -21,8 +21,9 @@ $aps_object              = new Any_Post_Slider();
 $text_domain             = $aps_object->get_plugin_name();
 $default_layout_options  = $aps_object->aps_display_layout_options();
 
-if(!isset($aps_attributes) || empty($default_arguments)):
-    $aps_default_option = get_option('anypostslider_options');
+$aps_default_option = get_option('anypostslider_options');
+
+if(!isset($aps_attributes) && empty($default_arguments)):
     $aps_carousal_arguments = array(
         'post_type'      => $aps_default_option['aps_post_types'],
         'post_count'     => $aps_default_option['aps_no_post_display'],
@@ -31,15 +32,19 @@ if(!isset($aps_attributes) || empty($default_arguments)):
         'display_slide'  => $aps_default_option['aps_no_slide_display']
     );
 else:
+    $aps_attributes['display_slide'] = isset($aps_attributes['display_slide']) ? $aps_attributes['display_slide'] : $aps_default_option['aps_no_slide_display'];
     $aps_carousal_arguments = $aps_attributes;
 endif;
+
 
 $get_posts_data = get_posts(
     array(
         'post_type'      => $aps_carousal_arguments['post_type'],
         'posts_per_page' => $aps_carousal_arguments['post_count'],
         'order'          => $aps_carousal_arguments['display_order'],
-        'slide_to_display' => $aps_carousal_arguments['display_slide'],
+        // 'slide_to_display' => $aps_carousal_arguments['display_slide'],
+        'display_layout' => $aps_carousal_arguments['display_layout'],
+        'display_slide'  => $aps_carousal_arguments['display_slide'],
         'post_status'    => array('publish')
     )
 );
@@ -52,7 +57,7 @@ if(isset($get_posts_data) && !is_admin()):
     elseif($aps_carousal_arguments['display_layout'] == 2):
         ob_start();
         setup_postdata( $get_posts_data );
-            require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-layout_teo.php');
+            require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-layout_two.php');
         echo ob_get_clean();
     elseif($aps_carousal_arguments['display_layout'] == 3):
         ob_start();
