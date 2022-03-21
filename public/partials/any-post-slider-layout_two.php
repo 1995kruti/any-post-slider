@@ -9,15 +9,11 @@
             <?php else: ?>
                 <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'public/images/place_holder.png'); ?>" alt="place_holder">
             <?php endif; ?>
-            <?php _e(get_the_date('l F j, Y',$post_item_val->ID)); ?>
-            <a href="<?php echo esc_url(get_the_permalink($post_item_val->ID)); ?>">
-            <h4><?php esc_attr_e( $post_item_val->post_title, $text_domain); ?></h4>
+            <span class="aps_slider_date"> <?php _e(get_the_date('l F j, Y',$post_item_val->ID)); ?></span>
+            <a href="<?php echo esc_url(get_the_permalink($post_item_val->ID));?>">
+                <h3><?php esc_attr_e( $post_item_val->post_title, $text_domain); ?></h3>
             </a>
-            <a href="<?php echo esc_url(get_the_permalink($post_item_val->ID)); ?>">
-                <span class="btn button">
-                    <?php esc_attr_e("Read More",$text_domain); ?>
-                </span>
-            </a>
+            <a href="<?php echo esc_url(get_the_permalink($post_item_val->ID));?>" class="btn button"><?php esc_attr_e("Read More",$text_domain); ?></a>
         </div>
         <?php endforeach; ?>
     </div>

@@ -104,7 +104,11 @@ class Any_Post_Slider_Public {
 		wp_localize_script( $this->plugin_name, 'any_post_slider_public' , array( 
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'aps_image_dir' => ANY_POST_SLIDER_PLUGIN_URL.'public/images',
-			'aps_scroll_to_slide' => $options['aps_scroll_to_slide']
+			'aps_scroll_to_slide' => $options['aps_scroll_to_slide'],
+			'aps_sliderarrows' => $options['aps_sliderarrows'],
+			'aps_sliderdots' => $options['aps_sliderdots'],
+			'aps_sliderspeed' => $options['aps_sliderspeed'],
+			'aps_sliderautoplay' => $options['aps_sliderautoplay'],
 			) 
 		);
 		if($options['aps_scroll_to_slide'] == true):

@@ -177,6 +177,14 @@ class Any_Post_Slider_Admin {
 			$aps_options['aps_order_by'] = sanitize_text_field($_POST['aps_post_order']);
 
 			$aps_options['aps_scroll_to_slide'] = (int)stripslashes($_POST['aps_scroll_to_slide']);
+			
+			$aps_options['aps_sliderarrows'] = sanitize_text_field($_POST['aps_sliderarrows']);
+			
+			$aps_options['aps_sliderdots'] = sanitize_text_field($_POST['aps_sliderdots']);
+			
+			$aps_options['aps_sliderautoplay'] = sanitize_text_field($_POST['aps_sliderautoplay']);
+			
+			$aps_options['aps_sliderspeed'] = sanitize_text_field($_POST['aps_sliderspeed']);
 
 			$aps_options['aps_no_slide_display'] = (int)stripslashes($_POST['aps_no_slide_display']);
 			

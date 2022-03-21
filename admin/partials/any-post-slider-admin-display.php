@@ -3,7 +3,7 @@
 /**
  * Provide a admin area view for the plugin
  *
- * This file is used to markup the admin-facing aspects of the plugin.
+ * This file is used to markup the admin-facing apsects of the plugin.
  *
  * @link       https://www.itpathsolutions.com/
  * @since      1.0.0
@@ -17,7 +17,7 @@
  $aps_options           = $aps_object->aps_get_options();  
  $aps_get_all_post_type = $aps_object->aps_get_all_post_type();
  $layout_option         = $aps_object->aps_display_layout_options();
- $default_shortcode     = '[aps_slider post_type="'.$aps_options['aps_post_types'].'" post_count="'.$aps_options['aps_no_post_display'].'" display_layout="'.$aps_options['aps_display_layout'].'" display_order="'.$aps_options['aps_order_by'].' display_slide="'.$aps_options['aps_no_slide_display'].'" ]';?>
+ $default_shortcode     = '[aps_slider]';?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div id="anypostlsider_admin" class="wrap">
@@ -50,15 +50,11 @@
                     <option value="1" <?php if($aps_options['aps_display_layout'] == '1'){ _e("selected");}?>>Style 1</option>
                     <option value="2" <?php if($aps_options['aps_display_layout'] == '2'){ _e("selected");}?>>Style 2</option>
                     <option value="3" <?php if($aps_options['aps_display_layout'] == '3'){ _e("selected");}?>>Style 3</option>
-                    <option value="4" <?php if($aps_options['aps_display_layout'] == '4'){ _e("selected");}?>>Style 4</option>
-                    <option value="5" <?php if($aps_options['aps_display_layout'] == '5'){ _e("selected");}?>>Style 5</option>
                 </select>
                 <div class="aps_style_output">
                     <img class="aps_style_1" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style1.png" alt="img1" style="display:none">
                     <img class="aps_style_2" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style2.png" alt="img1" style="display:none">
                     <img class="aps_style_3" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style3.png" alt="img1" style="display:none">
-                    <img class="aps_style_4" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style1.png" alt="img1" style="display:none">
-                    <img class="aps_style_5" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style1.png" alt="img1" style="display:none">
                 </div>              
             </div>
         </div>
@@ -80,6 +76,40 @@
                 </select>
             </div>
         </div>
+        <div class="aps_row">
+            <div class="aps_row_name">Show Navigation Arrows:</div>
+            <div class="aps_row_desc">
+                <input type="radio" name="aps_sliderarrows" id="aps_sliderarrows1" value="yes" <?php if($aps_options['aps_sliderarrows'] == 'yes'){?> checked="checked"<?php }?>>
+                <label for="aps_sliderarrows1">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="aps_sliderarrows" id="aps_sliderarrows3" value="des" <?php if($aps_options['aps_sliderarrows'] == 'des'){?> checked="checked"<?php }?>>
+                <label for="aps_sliderarrows3">Desktop Only</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="aps_sliderarrows" id="aps_sliderarrows2" value="no" <?php if($aps_options['aps_sliderarrows'] == 'no'){?> checked="checked"<?php }?>>
+                <label for="aps_sliderarrows2">No</label>
+            </div>
+        </div>
+        <div class="aps_row">
+            <div class="aps_row_name">Show Navigation Dots:</div>
+            <div class="aps_row_desc">
+                <input type="radio" name="aps_sliderdots" id="aps_sliderdots1" value="yes" <?php if($aps_options['aps_sliderdots'] == 'yes'){?> checked="checked"<?php }?>>
+                <label for="aps_sliderdots1">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="aps_sliderdots" id="aps_sliderdots2" value="no" <?php if($aps_options['aps_sliderdots'] == 'no'){?> checked="checked"<?php }?>>
+                <label for="aps_sliderdots2">No</label>
+            </div>
+        </div>
+         <div class="aps_row">
+            <div class="aps_row_name">Autoplay Slides:</div>
+            <div class="aps_row_desc">
+               <input type="radio" name="aps_sliderautoplay" id="aps_sliderautoplay1" value="no" <?php if($aps_options['aps_sliderautoplay'] == 'no'){?> checked="checked"<?php }?>>
+                <label for="aps_sliderautoplay1">No</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="aps_sliderautoplay" id="aps_sliderautoplay2" value="yes" <?php if($aps_options['aps_sliderautoplay'] == 'yes'){?> checked="checked"<?php }?>>
+                <label for="aps_sliderautoplay2">Yes</label></br></br>
+                <div class="aps_sliderspeed" <?php if($aps_options['aps_sliderautoplay'] == 'no'){?> style="display: none;"<?php } ?>>
+                    <input type="text" name="aps_sliderspeed" id="aps_sliderspeed" value="<?php esc_attr_e($aps_options['aps_sliderspeed'],$text_domain); ?>"></br>
+                    <label for="aps_sliderspeed">How long (in milliseconds) the slider should animate between slides.</label>
+                </div>
+            </div>
+        </div>
+
         <div class="aps_row">
             <div class="aps_row_name">Select Slide to Display:</div>
             <div class="aps_row_desc">
