@@ -34,6 +34,7 @@
 	var aps_sliderdots = any_post_slider_public.aps_sliderdots;
 	var aps_sliderautoplay = any_post_slider_public.aps_sliderautoplay;
 	var aps_sliderspeed = any_post_slider_public.aps_sliderspeed;
+	var aps_equalheight = any_post_slider_public.aps_equalheight;
 
 
 	// get the layout option from different templates
@@ -75,12 +76,10 @@
 		aps_dots = true;
 	}
 
-	console.log(asp_layout_option);
-
 	// initialize the owlcarousel
 	aps_owl_slider.owlCarousel({
 		loop:true,
-		margin:5,
+		margin:20,
 		dots: aps_dots,
 		nav:aps_nav,
 		navClass: ['btn button owl-prev','btn button owl-next'],
@@ -91,7 +90,7 @@
 		touchDrag: true,
 		autoplay: aps_autoplay,
 		autoplayTimeout:aps_speed,
-		navText: ["<span><img src="+image_dir_url+'/back.png;'+" /></span>", "<span><img src="+image_dir_url+'/next.png;'+" /></span>"],
+		navText: ["<span><img src="+image_dir_url+'/back.png'+" /></span>", "<span><img src="+image_dir_url+'/next.png'+" /></span>"],
 		responsive:{
 			0:{
 				items:1,
@@ -118,6 +117,37 @@
 			}
 			e.preventDefault();
 		});
+	}
+
+	//Equal Height for the slider images
+	if(aps_equalheight == 'yes'){
+		(function () {
+		  	aps_equalHeight(false);
+		})();
+		window.onresize = function(){
+		  aps_equalHeight(true);
+		}
+		 
+		function aps_equalHeight(aps_resize) {
+		  	var aps_elements = jQuery(".aps-slider .item img"),
+		      	aps_allHeights = [],
+		      	apsi = 0;
+		  	if(aps_resize === true){
+		    	for(apsi = 0; apsi < aps_elements.length; apsi++){
+		      		aps_elements[apsi].style.height = 'auto';
+		    	}
+		  	}
+		  	for(apsi = 0; apsi < aps_elements.length; apsi++){
+		    	var elementHeight = aps_elements[apsi].clientHeight;
+		    	aps_allHeights.push(elementHeight);
+		  	}
+		  	for(apsi = 0; apsi < aps_elements.length; apsi++){
+		    	aps_elements[apsi].style.height = Math.max.apply( Math, aps_allHeights) + 'px';
+		    	if(aps_resize === false){
+		      		aps_elements[apsi].className = aps_elements[apsi].className + " eq_height";
+		    	}
+		  	}
+		}
 	}
 
 })( jQuery );

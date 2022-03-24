@@ -12,6 +12,7 @@
  * @subpackage Any_Post_Slider/admin/partials
  */
 
+ $aps_tab = isset($_GET['tab']) ? $_GET['tab'] : null;
  $aps_object            = new Any_Post_Slider();
  $text_domain           = $aps_object->get_plugin_name();
  $aps_options           = $aps_object->aps_get_options();  
@@ -23,15 +24,15 @@
 <div id="anypostlsider_admin" class="wrap">
     <h2>Any Post Slider Options</h2>
     <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>" enctype="multipart/form-data">
+        <nav class="nav-tab-wrapper aps-nav-tab-wrapper">
+            <a href="admin.php?page=any-post-slider-settings" class="nav-tab <?php if($aps_tab === null):?>nav-tab-active<?php endif; ?>">General</a>
+            <a href="admin.php?page=any-post-slider-settings&tab=info" class="nav-tab <?php if($aps_tab === 'info'):?>nav-tab-active<?php endif; ?>">Information</a>
+        </nav>
         <input type="hidden" name="action" value="aps_update_settings"/>
         <?php wp_nonce_field(-1,'anypostlsider_admin_options_nonce_field' ); ?>
         <?php if(isset($_GET["update-status"])): ?>
             <div class="notice notice-success is-dismissible"><p><?php _e('Settings save successfully!'); ?>.</p></div>
         <?php endif; ?>
-        <div class="aps_row">
-            <div class="aps_row_name">Display Posts</div>
-            <div class="aps_row_desc"><input type="number" maxlength="2" min="-1" max="50" name="aps_no_post_display" value="<?php esc_attr_e($aps_options['aps_no_post_display'],$text_domain); ?>" /></div>
-        </div>
         <div class="aps_row">
             <div class="aps_row_name">Select Post Types</div>
             <div class="aps_row_desc">
@@ -39,7 +40,7 @@
                 foreach($aps_get_all_post_type as $pos_type_key => $pos_type_val): 
                     $post_type_obj = get_post_type_object( $pos_type_val );
                 ?>
-                <input type="radio" name="aps_pos_type" id="<?php echo $pos_type_key;?>" value="<?php esc_attr_e( $pos_type_val, $text_domain ); ?>" <?php if($aps_options['aps_post_types'] == $pos_type_val){ esc_attr_e( 'checked', $text_domain ); }?>/><label for="<?php echo $pos_type_key;?>"> <?php esc_attr_e( $post_type_obj->labels->name, $text_domain ); ?></label>
+                <input type="radio" name="aps_pos_type" id="<?php echo $pos_type_key;?>" value="<?php esc_attr_e( $pos_type_val, $text_domain ); ?>" <?php if($aps_options['aps_post_types'] == $pos_type_val){ esc_attr_e( 'checked', $text_domain ); }?>/><label for="<?php echo $pos_type_key;?>"> <?php esc_attr_e( $post_type_obj->labels->name, $text_domain ); ?></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php endforeach; ?>
             </div>	
         </div>
@@ -77,6 +78,11 @@
             </div>
         </div>
         <div class="aps_row">
+            <div class="aps_row_name">Display Posts</div>
+            <div class="aps_row_desc"><input type="number" maxlength="2" min="-1" max="50" name="aps_no_post_display" value="<?php esc_attr_e($aps_options['aps_no_post_display'],$text_domain); ?>" /></div>
+        </div>
+        
+        <div class="aps_row">
             <div class="aps_row_name">Show Navigation Arrows:</div>
             <div class="aps_row_desc">
                 <input type="radio" name="aps_sliderarrows" id="aps_sliderarrows1" value="yes" <?php if($aps_options['aps_sliderarrows'] == 'yes'){?> checked="checked"<?php }?>>
@@ -96,10 +102,10 @@
                 <label for="aps_sliderdots2">No</label>
             </div>
         </div>
-         <div class="aps_row">
+        <div class="aps_row">
             <div class="aps_row_name">Autoplay Slides:</div>
             <div class="aps_row_desc">
-               <input type="radio" name="aps_sliderautoplay" id="aps_sliderautoplay1" value="no" <?php if($aps_options['aps_sliderautoplay'] == 'no'){?> checked="checked"<?php }?>>
+                <input type="radio" name="aps_sliderautoplay" id="aps_sliderautoplay1" value="no" <?php if($aps_options['aps_sliderautoplay'] == 'no'){?> checked="checked"<?php }?>>
                 <label for="aps_sliderautoplay1">No</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="radio" name="aps_sliderautoplay" id="aps_sliderautoplay2" value="yes" <?php if($aps_options['aps_sliderautoplay'] == 'yes'){?> checked="checked"<?php }?>>
                 <label for="aps_sliderautoplay2">Yes</label></br></br>
@@ -111,19 +117,21 @@
         </div>
 
         <div class="aps_row">
+            <div class="aps_row_name">Show Images Equal Height:</div>
+            <div class="aps_row_desc">
+                <input type="radio" name="aps_equalheight" id="aps_equalheight1" value="yes" <?php if($aps_options['aps_equalheight'] == 'yes'){?> checked="checked"<?php }?>>
+                <label for="aps_equalheight1">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="aps_equalheight" id="aps_equalheight2" value="no" <?php if($aps_options['aps_equalheight'] == 'no'){?> checked="checked"<?php }?>>
+                <label for="aps_equalheight2">No</label>
+            </div>
+        </div>
+
+        <div class="aps_row">
             <div class="aps_row_name">Select Slide to Display:</div>
             <div class="aps_row_desc">
                 <input type="number" maxlength="6" min="1" max="6" name="aps_no_slide_display" value="<?php esc_attr_e($aps_options['aps_no_slide_display'],$text_domain); ?>" />
             </div>
         </div>
         <div class="aps_row"><div class="aps_row_name"><input class="button-primary" type="submit" name="aps_settings_save" value="Save Changes" /></div></div>
-    </form>
-    <div class="aps_current_short_code">
-        <h6>Your short code for above chosen options:</h6>
-        <div class='aps-current-short-code-wrap'>
-            <input type="text" size="100" readonly name="aps_shortcode" id="aps_shortcode_id" value="<?php  esc_attr_e($default_shortcode,$text_domain);  ?>" disabled/>
-            <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'/admin/images/copy.png');?>" class="aps-copy-to-clip" id="aps_copy_to_clip_id" />
-        </div>
-    </div>
+    </form>    
 </div>
-<span class="aps-text-copied-msg" style="display:none;">Shortcode copied!</span>

@@ -51,21 +51,20 @@ if(isset($get_posts_data) && !is_admin()):
     if($aps_carousal_arguments['display_layout'] == 1):
         
         setup_postdata( $get_posts_data );
-            require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-layout_one.php');
-            wp_reset_postdata();
+        require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-layout_one.php');
+        wp_reset_postdata();
         
     elseif($aps_carousal_arguments['display_layout'] == 2):
         
         setup_postdata( $get_posts_data );
-            require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-layout_two.php');
-            wp_reset_postdata();
+        require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-layout_two.php');
+        wp_reset_postdata();
         
     elseif($aps_carousal_arguments['display_layout'] == 3):
         
         setup_postdata( $get_posts_data );
-            require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-layout_three.php');
-            wp_reset_postdata();
+        require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-layout_three.php');
+        wp_reset_postdata();
         
     endif;
-
 endif;

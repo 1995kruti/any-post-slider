@@ -272,10 +272,16 @@ class Any_Post_Slider {
 
 			$options['aps_scroll_to_slide'] = 1;
 
+			$options['aps_sliderarrows'] = 'no';
+
+			$options['aps_sliderdots'] = 'yes';
+
+			$options['aps_sliderautoplay'] = 'no';
+			
+			$options['aps_equalheight'] = 'no';
+
 			$options['aps_no_slide_display'] = 3;
 
-			
-			
 			update_option('anypostslider_options', $options);
 		}
 		return $options;

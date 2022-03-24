@@ -82,11 +82,6 @@ class Any_Post_Slider_Admin {
 		 * class.
 		 */
 		
-		if ( isset($_GET["page"]) && $_GET["page"]  == 'any-post-slider-settings'):
-		// enqueue bootstrap CSS
-		wp_enqueue_style( 'bootstrap-min-css', plugin_dir_url( __FILE__ ) . 'css/bootstrap/bootstrap.min.css', array(), $this->version, 'all' );
-		endif;
-
 		// enqueue slider plugin CSS
 		wp_enqueue_style( 'any-post-slider-admin', plugin_dir_url( __FILE__ ) . 'css/any-post-slider-admin.css', array(), $this->version, 'all' );
 
@@ -110,15 +105,9 @@ class Any_Post_Slider_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		
-		// enqueue bootstrap slim js
-		// wp_enqueue_script( 'jquery-slim-min', plugin_dir_url( __FILE__ ) . 'js/bootstrap/jquery.slim.min.js', array( 'jquery' ), $this->version, false );
-		
+			
 		// enqueue bootstrap popper js
 		wp_enqueue_script( 'popper-min-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap/popper.min.js', array( 'jquery' ), $this->version, false );
-
-		// enqueue bootstrap popper js
-		wp_enqueue_script( 'bootstrap-min-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap/bootstrap.min.js', array( 'jquery' ), $this->version, false );
 
 		// enqueue slider plugin JS
 		wp_enqueue_script( 'any-post-slider-admin-js', plugin_dir_url( __FILE__ ) . 'js/any-post-slider-admin.js', array( 'jquery' ), $this->version, false );
@@ -148,7 +137,12 @@ class Any_Post_Slider_Admin {
 	 * @since    1.0.0
 	 */
 	public static function anypostslider_display_submenu_page() {
-		include ANY_POST_SLIDER_PLUGIN_DIR.'/admin/partials/any-post-slider-admin-display.php';
+		$aps_tab = isset($_GET['tab']) ? $_GET['tab'] : null;
+		if($aps_tab === null){
+			include ANY_POST_SLIDER_PLUGIN_DIR.'/admin/partials/any-post-slider-admin-display.php';
+		}else{
+			include ANY_POST_SLIDER_PLUGIN_DIR.'/admin/partials/any-post-slider-admin-info.php';
+		}
 	}
 
 	/**
@@ -185,6 +179,8 @@ class Any_Post_Slider_Admin {
 			$aps_options['aps_sliderautoplay'] = sanitize_text_field($_POST['aps_sliderautoplay']);
 			
 			$aps_options['aps_sliderspeed'] = sanitize_text_field($_POST['aps_sliderspeed']);
+			
+			$aps_options['aps_equalheight'] = sanitize_text_field($_POST['aps_equalheight']);
 
 			$aps_options['aps_no_slide_display'] = (int)stripslashes($_POST['aps_no_slide_display']);
 			
@@ -205,7 +201,7 @@ class Any_Post_Slider_Admin {
 	public function aps_settings_link( array $links ) {
 		$url = get_admin_url() . "admin.php?page=any-post-slider-settings";
 		$settings_link = '<a href="' . $url . '">' . __('Settings', 'textdomain') . '</a>';
-		  $links[] = $settings_link;
+		  	$links[] = $settings_link;
 		return $links;
 	}
 	
