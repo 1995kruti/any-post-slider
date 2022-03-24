@@ -105,9 +105,6 @@ class Any_Post_Slider_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-			
-		// enqueue bootstrap popper js
-		wp_enqueue_script( 'popper-min-js', plugin_dir_url( __FILE__ ) . 'js/bootstrap/popper.min.js', array( 'jquery' ), $this->version, false );
 
 		// enqueue slider plugin JS
 		wp_enqueue_script( 'any-post-slider-admin-js', plugin_dir_url( __FILE__ ) . 'js/any-post-slider-admin.js', array( 'jquery' ), $this->version, false );

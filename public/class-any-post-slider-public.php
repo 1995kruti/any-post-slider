@@ -113,7 +113,6 @@ class Any_Post_Slider_Public {
 			) 
 		);
 		if($options['aps_scroll_to_slide'] == true):
-			wp_enqueue_script( 'any_post_slider_public_mouse_wheel', plugin_dir_url( __FILE__ ) . 'js/jquery.mousewheel.js', array( 'jquery' ), $this->version, true );
 			wp_enqueue_script( 'any_post_slider_public_mouse_wheel_min', plugin_dir_url( __FILE__ ) . 'js/jquery.mousewheel.min.js', array( 'jquery' ), $this->version, true );
 		endif;
 	}
