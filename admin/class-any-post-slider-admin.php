@@ -123,7 +123,7 @@ class Any_Post_Slider_Admin {
 			'manage_options',
 			'any-post-slider-settings',
 			array($this, 'anypostslider_display_submenu_page'),
-			ANY_POST_SLIDER_PLUGIN_URL.'admin/images/snowy-owl.png',
+			'dashicons-slides',
 			99
 		);
 	}
