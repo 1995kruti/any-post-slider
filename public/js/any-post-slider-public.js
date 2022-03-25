@@ -67,7 +67,7 @@
 	// set autoplay speed param
 	var aps_speed = 3000;
 	if(aps_sliderspeed){
-		aps_speed = aps_sliderspeed;
+		aps_speed = aps_sliderspeed * 1000;
 	}
 
 	// set dots param
@@ -75,6 +75,13 @@
 	if(aps_sliderdots == "yes"){
 		aps_dots = true;
 	}
+
+	//Check body RTL class
+	var RTL = false;
+	if(jQuery("body").hasClass("rtl")){
+		RTL = true;
+	}
+
 
 	// initialize the owlcarousel
 	aps_owl_slider.owlCarousel({
@@ -88,6 +95,7 @@
 		itemsDesktopSmall : [979,asp_layout_option],
 		mouseDrag: true,
 		touchDrag: true,
+		rtl: RTL,
 		autoplay: aps_autoplay,
 		autoplayTimeout:aps_speed,
 		navText: ["<span><img src="+image_dir_url+'/back.png'+" /></span>", "<span><img src="+image_dir_url+'/next.png'+" /></span>"],
@@ -118,7 +126,7 @@
 			e.preventDefault();
 		});
 	}
-
+	
 	//Equal Height for the slider images
 	if(aps_equalheight == 'yes'){
 		(function () {

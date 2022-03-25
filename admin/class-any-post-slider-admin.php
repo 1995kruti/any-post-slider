@@ -134,12 +134,7 @@ class Any_Post_Slider_Admin {
 	 * @since    1.0.0
 	 */
 	public static function anypostslider_display_submenu_page() {
-		$aps_tab = isset($_GET['tab']) ? $_GET['tab'] : null;
-		if($aps_tab === null){
-			include ANY_POST_SLIDER_PLUGIN_DIR.'/admin/partials/any-post-slider-admin-display.php';
-		}else{
-			include ANY_POST_SLIDER_PLUGIN_DIR.'/admin/partials/any-post-slider-admin-info.php';
-		}
+		include ANY_POST_SLIDER_PLUGIN_DIR.'/admin/partials/any-post-slider-admin-display.php';
 	}
 
 	/**

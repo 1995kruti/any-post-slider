@@ -12,7 +12,6 @@
  * @subpackage Any_Post_Slider/admin/partials
  */
 
- $aps_tab = isset($_GET['tab']) ? $_GET['tab'] : null;
  $aps_object            = new Any_Post_Slider();
  $text_domain           = $aps_object->get_plugin_name();
  $aps_options           = $aps_object->aps_get_options();  
@@ -25,8 +24,7 @@
     <h2>Any Post Slider Options</h2>
     <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>" enctype="multipart/form-data">
         <nav class="nav-tab-wrapper aps-nav-tab-wrapper">
-            <a href="admin.php?page=any-post-slider-settings" class="nav-tab <?php if($aps_tab === null):?>nav-tab-active<?php endif; ?>">General</a>
-            <a href="admin.php?page=any-post-slider-settings&tab=info" class="nav-tab <?php if($aps_tab === 'info'):?>nav-tab-active<?php endif; ?>">Information</a>
+            <a href="admin.php?page=any-post-slider-settings" class="nav-tab nav-tab-active">General</a>
         </nav>
         <input type="hidden" name="action" value="aps_update_settings"/>
         <?php wp_nonce_field(-1,'anypostlsider_admin_options_nonce_field' ); ?>
@@ -34,7 +32,7 @@
             <div class="notice notice-success is-dismissible"><p><?php _e('Settings save successfully!'); ?>.</p></div>
         <?php endif; ?>
         <div class="aps_row">
-            <div class="aps_row_name">Select Post Types</div>
+            <div class="aps_row_name">Select Post Types:</div>
             <div class="aps_row_desc">
                 <?php 
                 foreach($aps_get_all_post_type as $pos_type_key => $pos_type_val): 
@@ -45,7 +43,7 @@
             </div>	
         </div>
         <div class="aps_row">
-            <div class="aps_row_name">Select Style</div>
+            <div class="aps_row_name">Select Style:</div>
             <div class="aps_row_desc">
                 <select name="aps_display_layout" id="aps_style">
                     <option value="1" <?php if($aps_options['aps_display_layout'] == '1'){ _e("selected");}?>>Style 1</option>
@@ -53,9 +51,9 @@
                     <option value="3" <?php if($aps_options['aps_display_layout'] == '3'){ _e("selected");}?>>Style 3</option>
                 </select>
                 <div class="aps_style_output">
-                    <img class="aps_style_1" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style1.png" alt="img1" style="display:none">
-                    <img class="aps_style_2" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style2.png" alt="img1" style="display:none">
-                    <img class="aps_style_3" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style3.png" alt="img1" style="display:none">
+                    <img class="aps_style_1" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style1.png" alt="img1" <?php echo ($aps_options['aps_display_layout'] == '1') ? '' : 'style="display:none"';?>>
+                    <img class="aps_style_2" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style2.png" alt="img2" <?php echo ($aps_options['aps_display_layout'] == '2') ? '' : 'style="display:none"';?>>
+                    <img class="aps_style_3" src="<?php echo ANY_POST_SLIDER_PLUGIN_URL;?>/admin/images/slider_style3.png" alt="img3" <?php echo ($aps_options['aps_display_layout'] == '3') ? '' : 'style="display:none"';?>>
                 </div>              
             </div>
         </div>
@@ -69,7 +67,7 @@
             </div>
         </div>
         <div class="aps_row">
-            <div class="aps_row_name">Scroll to Slide:</div>
+            <div class="aps_row_name">Mousewheel Scrolling:</div>
             <div class="aps_row_desc">
                 <select id="aps_scroll_to_slide" name="aps_scroll_to_slide">
                     <option value="1" <?php if($aps_options['aps_scroll_to_slide'] == '1'){ esc_attr_e( 'selected', $text_domain ); }?> ><?php esc_attr_e( 'Yes', $text_domain ); ?></option>
@@ -111,7 +109,7 @@
                 <label for="aps_sliderautoplay2">Yes</label></br></br>
                 <div class="aps_sliderspeed" <?php if($aps_options['aps_sliderautoplay'] == 'no'){?> style="display: none;"<?php } ?>>
                     <input type="text" name="aps_sliderspeed" id="aps_sliderspeed" value="<?php esc_attr_e($aps_options['aps_sliderspeed'],$text_domain); ?>"></br>
-                    <label for="aps_sliderspeed">How long (in milliseconds) the slider should animate between slides.</label>
+                    <label for="aps_sliderspeed">How long (in seconds) the slider should animate between slides.</label>
                 </div>
             </div>
         </div>
@@ -134,4 +132,12 @@
         </div>
         <div class="aps_row"><div class="aps_row_name"><input class="button-primary" type="submit" name="aps_settings_save" value="Save Changes" /></div></div>
     </form>    
+     <div class="aps_current_short_code">
+        <h4>Copy this short code to display slider:</h4>
+        <div class='aps-current-short-code-wrap'>
+            <input type="text" size="20" readonly name="aps_shortcode" id="aps_shortcode_id" value="<?php  esc_attr_e($default_shortcode,$text_domain);  ?>" disabled/>&nbsp;&nbsp; 
+            <img src="<?php echo esc_url(ANY_POST_SLIDER_PLUGIN_URL.'/admin/images/copy.svg');?>" class="aps-copy-to-clip" id="aps_copy_to_clip_id" alt="copy"/>
+        </div>
+    </div>
+    <span class="aps-text-copied-msg" style="display:none;">Shortcode copied!</span>
 </div>
