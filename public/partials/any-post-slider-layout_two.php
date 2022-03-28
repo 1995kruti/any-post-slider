@@ -3,7 +3,7 @@
     <input type="hidden" class="display-layout" id="display-layout-id" value="<?php esc_attr_e(  $aps_carousal_arguments['display_slide'], $text_domain )?>"/>
     <div class="owl-carousel owl-theme aps-slider" id="aps_slider">
         <?php foreach($get_posts_data as $post_item_key => $post_item_val): ?>
-        <div class="item" data-hash="<?php esc_attr_e($post_item_val->ID); ?>">
+        <div class="item">
             <?php if(has_post_thumbnail($post_item_val->ID)): ?>
                 <?php _e(get_the_post_thumbnail( $post_item_val->ID, 'large' )); ?>
             <?php else: ?>
