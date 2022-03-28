@@ -18,7 +18,11 @@
 
 $aps_object              = new Any_Post_Slider();
 $text_domain             = $aps_object->get_plugin_name();
+$plugin_version          = $aps_object->get_version();
 $default_layout_options  = $aps_object->aps_display_layout_options();
+
+$aps_public_object  = new Any_Post_Slider_Public($text_domain,$plugin_version);
+
 
 $aps_default_option = get_option('anypostslider_options');
 
@@ -47,7 +51,10 @@ $get_posts_data = get_posts(
         'post_status'    => array('publish')
     )
 );
-if(isset($get_posts_data) && !is_admin()):
+
+
+if(isset($get_posts_data) && !is_admin() && !empty($get_posts_data)):
+   
     if($aps_carousal_arguments['display_layout'] == 1):
         
         setup_postdata( $get_posts_data );
@@ -67,4 +74,10 @@ if(isset($get_posts_data) && !is_admin()):
         wp_reset_postdata();
         
     endif;
+else:
+
+    setup_postdata( $aps_carousal_arguments );
+    require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-no_content.php');
+    wp_reset_postdata();
+
 endif;

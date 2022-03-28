@@ -110,6 +110,7 @@ class Any_Post_Slider_Public {
 			'aps_sliderspeed' => $options['aps_sliderspeed'],
 			'aps_sliderautoplay' => $options['aps_sliderautoplay'],
 			'aps_equalheight' => $options['aps_equalheight'],
+			'aps_loop' => $options['aps_loop']
 			) 
 		);
 		if($options['aps_scroll_to_slide'] == true):

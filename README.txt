@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: krutimodi,  jayminips
+Contributors: krutimodi,  pateljaymin
 Donate link: https://www.itpathsolutions.com/
 Tags: slider , owl carousel , scrolling , scroll to slide , post slider , custom post type slider
 Requires at least: 3.0.1
@@ -11,6 +11,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Easily implement an Owl Carousel to any post type using shortcode
 
 == Description ==
+
+Any Post Slider is the most powerful WordPress plugin to create sliders. Fully responsive and works with any WordPress theme. It Creates Amazing Sliders for Any Post Types.
 
 == Any Post Slider ==
 

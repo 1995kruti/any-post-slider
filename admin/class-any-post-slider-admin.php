@@ -167,6 +167,8 @@ class Any_Post_Slider_Admin {
 			$aps_options['aps_sliderarrows'] = sanitize_text_field($_POST['aps_sliderarrows']);
 			
 			$aps_options['aps_sliderdots'] = sanitize_text_field($_POST['aps_sliderdots']);
+
+			$aps_options['aps_loop'] = sanitize_text_field($_POST['aps_loop']);
 			
 			$aps_options['aps_sliderautoplay'] = sanitize_text_field($_POST['aps_sliderautoplay']);
 			

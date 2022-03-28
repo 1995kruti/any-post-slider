@@ -17,8 +17,8 @@
                         <h3><?php esc_attr_e( $post_item_val->post_title, $text_domain); ?></h3>
                     </a>            
                     <?php 
-                    if(has_excerpt($post_item_val->ID)):                
-                       $excerpt = substr(get_the_excerpt($post_item_val->ID), 0, 100);  ?>
+                    $excerpt = substr(get_the_excerpt($post_item_val->ID), 0, 50);
+                    if(!empty($excerpt)): ?>
                        <p class='aps-excerpt'><?php _e($excerpt); ?> </p>
                     <?php endif; ?>
                     <a href="<?php echo esc_url(get_the_permalink($post_item_val->ID)); ?>" class="btn button"><?php esc_attr_e("Read More",$text_domain); ?></a>

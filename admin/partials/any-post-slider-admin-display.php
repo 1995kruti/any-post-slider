@@ -101,12 +101,21 @@
             </div>
         </div>
         <div class="aps_row">
+            <div class="aps_row_name">Show Loop:</div>
+            <div class="aps_row_desc">
+                <input type="radio" name="aps_loop" id="aps_loop1" value="yes" <?php if($aps_options['aps_loop'] == 'yes'){?> checked="checked"<?php }?>>
+                <label for="aps_loop1">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="aps_loop" id="aps_loop2" value="no" <?php if($aps_options['aps_loop'] == 'no'){?> checked="checked"<?php }?>>
+                <label for="aps_loop2">No</label>
+            </div>
+        </div>
+        <div class="aps_row">
             <div class="aps_row_name">Autoplay Slides:</div>
             <div class="aps_row_desc">
+            <input type="radio" name="aps_sliderautoplay" id="aps_sliderautoplay2" value="yes" <?php if($aps_options['aps_sliderautoplay'] == 'yes'){?> checked="checked"<?php }?>>
+                <label for="aps_sliderautoplay2">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="radio" name="aps_sliderautoplay" id="aps_sliderautoplay1" value="no" <?php if($aps_options['aps_sliderautoplay'] == 'no'){?> checked="checked"<?php }?>>
-                <label for="aps_sliderautoplay1">No</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="aps_sliderautoplay" id="aps_sliderautoplay2" value="yes" <?php if($aps_options['aps_sliderautoplay'] == 'yes'){?> checked="checked"<?php }?>>
-                <label for="aps_sliderautoplay2">Yes</label></br></br>
+                <label for="aps_sliderautoplay1">No</label></br></br>
                 <div class="aps_sliderspeed" <?php if($aps_options['aps_sliderautoplay'] == 'no'){?> style="display: none;"<?php } ?>>
                     <input type="text" name="aps_sliderspeed" id="aps_sliderspeed" value="<?php esc_attr_e($aps_options['aps_sliderspeed'],$text_domain); ?>"></br>
                     <label for="aps_sliderspeed">How long (in seconds) the slider should animate between slides.</label>

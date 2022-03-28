@@ -276,6 +276,8 @@ class Any_Post_Slider {
 
 			$options['aps_sliderdots'] = 'yes';
 
+			$options['aps_loop'] = 'yes';
+
 			$options['aps_sliderautoplay'] = 'no';
 			
 			$options['aps_equalheight'] = 'no';

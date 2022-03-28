@@ -35,6 +35,7 @@
 	var aps_sliderautoplay = any_post_slider_public.aps_sliderautoplay;
 	var aps_sliderspeed = any_post_slider_public.aps_sliderspeed;
 	var aps_equalheight = any_post_slider_public.aps_equalheight;
+	var aps_loop = any_post_slider_public.aps_loop;
 
 
 	// get the layout option from different templates
@@ -82,10 +83,16 @@
 		RTL = true;
 	}
 
+	//Check loop 
+	var aps_slide_loop = false;
+	if(aps_loop == "yes"){
+		aps_slide_loop = true;
+	}
+
 
 	// initialize the owlcarousel
 	aps_owl_slider.owlCarousel({
-		loop:true,
+		loop:aps_slide_loop,
 		margin:20,
 		dots: aps_dots,
 		nav:aps_nav,
