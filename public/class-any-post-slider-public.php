@@ -75,6 +75,7 @@ class Any_Post_Slider_Public {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/owl.carousel.min.css', array(), $this->version, 'all' );
 		wp_enqueue_style( 'any-post-slider-public', plugin_dir_url( __FILE__ ) . 'css/any-post-slider-public.css', array(), $this->version,'all' );
+		
 
 	}
 
@@ -97,24 +98,9 @@ class Any_Post_Slider_Public {
 		 * class.
 		 */
 		
-		$options = get_option('anypostslider_options');
-
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/owl.carousel.min.js', array( 'jquery' ), $this->version, true );
 		wp_enqueue_script( 'any_post_slider_public', plugin_dir_url( __FILE__ ) . 'js/any-post-slider-public.js', array( 'jquery' ), $this->version, true );
-		wp_localize_script( $this->plugin_name, 'any_post_slider_public' , array( 
-			'ajax_url' => admin_url( 'admin-ajax.php' ),
-			'aps_image_dir' => ANY_POST_SLIDER_PLUGIN_URL.'public/images',
-			'aps_scroll_to_slide' => $options['aps_scroll_to_slide'],
-			'aps_sliderarrows' => $options['aps_sliderarrows'],
-			'aps_sliderdots' => $options['aps_sliderdots'],
-			'aps_sliderspeed' => $options['aps_sliderspeed'],
-			'aps_sliderautoplay' => $options['aps_sliderautoplay'],
-			'aps_equalheight' => $options['aps_equalheight'],
-			) 
-		);
-		if($options['aps_scroll_to_slide'] == true):
-			wp_enqueue_script( 'any_post_slider_public_mouse_wheel_min', plugin_dir_url( __FILE__ ) . 'js/jquery.mousewheel.min.js', array( 'jquery' ), $this->version, true );
-		endif;
+
 	}
 
 	/**
@@ -132,9 +118,18 @@ class Any_Post_Slider_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function aps_slider_shortcode($aps_attributes) {	
-		ob_start();
-			require(ANY_POST_SLIDER_PLUGIN_DIR . '/public/partials/any-post-slider-public-display.php');
+	public function aps_slider_shortcode($aps_attributes) {
+		
+		if(isset($aps_attributes['slider_id']) && $aps_attributes['slider_id']){
+			    ob_start();
+				require(dirname(__FILE__) . '/partials/any-post-slider-public-display.php');
+		if($options['aps_mousewheel_scroll'] == 'yes'):
+			wp_enqueue_script( 'any_post_slider_public_mouse_wheel_min', plugin_dir_url( __FILE__ ) . 'js/jquery.mousewheel.min.js', array( 'jquery' ), $this->version, true );
+		endif;
+		}
+		else{
+			echo 'Oops seems you entered incorrect Shortcode of Any Post Slider.';
+		}
 		return ob_get_clean();
 	}
 

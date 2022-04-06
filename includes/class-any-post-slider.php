@@ -92,14 +92,14 @@ class Any_Post_Slider {
 		}
 		$this->plugin_name = 'any-post-slider';
 
-		$this->options[] = $this->aps_get_options();
+		//$this->options[] = $this->aps_get_options();
 		$this->aps_post_types[] = $this->aps_get_all_post_type();
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-		$this->aps_set_default_settings();
+
 	}
 
 	/**
@@ -177,9 +177,12 @@ class Any_Post_Slider {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-		$this->loader->add_action( 'admin_menu', $plugin_admin,'anypostslider_add_submenu');
-		$this->loader->add_action( 'admin_post_aps_update_settings',$plugin_admin,'anypostslider_update_settings');
+		$this->loader->add_action( 'save_post',$plugin_admin,'anypostslider_update_settings',10,2);
 		$this->loader->add_filter( 'plugin_action_links_'.$this->plugin_name.'/'.$this->plugin_name.'.php',$plugin_admin,'aps_settings_link',10,1 );
+		$this->loader->add_action( 'add_meta_boxes', $plugin_admin,'aps_metabox');
+		$this->loader->add_action( 'init', $plugin_admin,'anypostslider_custom_post_type');
+		$this->loader->add_action( 'manage_any_post_slider_posts_custom_column' ,$plugin_admin, 'aps_new_coulmn', 10, 2 );
+		$this->loader->add_filter('manage_any_post_slider_posts_columns' ,$plugin_admin, 'set_custom_edit_aps_cpt_columns');
 
 	}
 
@@ -247,46 +250,23 @@ class Any_Post_Slider {
 	 * @return    array    The settings of the plugin.
 	 */
 	public function aps_get_options() {
-		$options = get_option('anypostslider_options'); // get plugins settings from database
-		return $options;
+		global $post;
+		$options = [];
+		$options['aps_no_post_display'] = get_post_meta($post->ID,'aps_no_post_display',true);
+		$options['aps_post_types'] = get_post_meta($post->ID,'aps_post_types',true);
+		$options['aps_display_layout'] = get_post_meta($post->ID,'aps_display_layout',true);
+		$options['aps_order_by'] = get_post_meta($post->ID,'aps_order_by',true);
+		$options['aps_mousewheel_scroll'] = get_post_meta($post->ID,'aps_mousewheel_scroll',true);
+		$options['aps_sliderarrows'] = get_post_meta($post->ID,'aps_sliderarrows',true);
+		$options['aps_sliderdots'] = get_post_meta($post->ID,'aps_sliderdots',true);
+		$options['aps_loop'] = get_post_meta($post->ID,'aps_loop',true);
+		$options['aps_sliderautoplay'] = get_post_meta($post->ID,'aps_sliderautoplay',true);
+		$options['aps_sliderspeed'] = get_post_meta($post->ID,'aps_sliderspeed',true);
+		$options['aps_equalheight'] = get_post_meta($post->ID,'aps_equalheight',true);
+		$options['aps_no_slide_display'] = get_post_meta($post->ID,'aps_no_slide_display',true);
+		$options['aps_shortcode_name'] = get_post_meta($post->ID,'aps_shortcode_name',true);
+		 return $options;
 	}
-
-	/**
-	 * Set the default settings of the plugin
-	 * 
-	 * @since     1.0.0
-	 * @return    array    The array of plugins settings.
-	 */
-	public function aps_set_default_settings() {
-		//Pull from WP options database table
-		$options = get_option('anypostslider_options');
-		if (!is_array($options)) {
-
-			$options['aps_no_post_display'] = 10;
-
-			$options['aps_post_types'] = 'post';
-
-			$options['aps_display_layout'] = 1;
-
-			$options['aps_order_by'] = 'DESC';
-
-			$options['aps_scroll_to_slide'] = 1;
-
-			$options['aps_sliderarrows'] = 'no';
-
-			$options['aps_sliderdots'] = 'yes';
-
-			$options['aps_sliderautoplay'] = 'no';
-			
-			$options['aps_equalheight'] = 'no';
-
-			$options['aps_no_slide_display'] = 3;
-
-			update_option('anypostslider_options', $options);
-		}
-		return $options;
-	}
-
 	/**
 	 * Get all post types of wordpress
 	 * 

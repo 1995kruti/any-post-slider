@@ -112,29 +112,82 @@ class Any_Post_Slider_Admin {
 	}
 
 	/**
-	 * Create action for the submenu page
+	 * Create action for the MEta Field For CPT
 	 *
 	 * @since    1.0.0
 	 */
-	public function anypostslider_add_submenu () {
-		add_menu_page(
-			__( 'Any Post Slider options', 'textdomain' ),
-			'Any Post Slider',
-			'manage_options',
-			'any-post-slider-settings',
-			array($this, 'anypostslider_display_submenu_page'),
-			'dashicons-slides',
-			99
-		);
+	public function aps_metabox() {
+	    add_meta_box(
+	        'aps-slider-setting',
+	        __( 'Any Post Slider Setting', 'sitepoint' ),
+	        array($this,'aps_sliders_settings'),
+	        'any_post_slider'
+	    );
 	}
 
 	/**
-	 * Admin settings submenu page
+	 * Create action for the CPT
 	 *
 	 * @since    1.0.0
 	 */
-	public static function anypostslider_display_submenu_page() {
-		include ANY_POST_SLIDER_PLUGIN_DIR.'/admin/partials/any-post-slider-admin-display.php';
+	public function anypostslider_custom_post_type () {
+
+			$supports = array(
+			'title', // APS Slider Title
+			);
+			$labels = array(
+			'name' => _x('Any Post Slider', 'plural'),
+			'singular_name' => _x('any post slider', 'singular'),
+			'menu_name' => _x('Any Post Slider', 'admin menu'),
+			'name_admin_bar' => _x('Any Post Slider', 'admin bar'),
+			'add_new' => _x('Add New Slider', 'add new'),
+			'add_new_item' => __('Add New Slider'),
+			'new_item' => __('New Slider'),
+			'edit_item' => __('Edit Slider'),
+			'view_item' => __('View Slider'),
+			'all_items' => __('All Sliders'),
+			'not_found' => __('No Slider found.'),
+			'register_meta_box_cb' => 'aps_metabox',
+			);
+			$args = array(
+			'supports' => $supports,
+			'labels' => $labels,
+			'hierarchical' => false,
+			'public' => false,  // it's not public, it shouldn't have it's own permalink, and so on
+			'publicly_queryable' => false,  // you should be able to query it
+			'show_ui' => true,  // you should be able to edit it in wp-admin
+			'exclude_from_search' => true,  // you should exclude it from search results
+			'show_in_nav_menus' => false,  // you shouldn't be able to add it to menus
+			'has_archive' => false,  // it shouldn't have archive page
+			'rewrite' => false,  // it shouldn't have rewrite rules
+			'menu_icon'           => 'dashicons-slides',
+			);
+			register_post_type('any_post_slider', $args);
+			
+	}
+
+	public function set_custom_edit_aps_cpt_columns($columns) {
+
+	    $columns['slider_shortcode'] = __( 'Slider Shordcode','');
+
+	    return $columns;
+	}
+	// Adding New Coulmn in CPT 
+	public function aps_new_coulmn( $column_name, $post_id ) 
+	{
+	    if ( $column_name == 'slider_shortcode')
+	    	$shortcode_name =  get_post_meta($post_id,'aps_shortcode_name',true);
+	        printf( '<span name="aps_shortcode" id="aps_shortcode_id" value="'.$shortcode_name.'"/>'.$shortcode_name.'</span>' );
+
+	}
+	/**
+	 * Admin settings page 
+	 *
+	 * @since    1.0.0
+	 */
+	public static function aps_sliders_settings() {
+
+		include dirname(__FILE__).'/partials/any-post-slider-cpt-display.php';
 	}
 
 	/**
@@ -142,47 +195,41 @@ class Any_Post_Slider_Admin {
 	 * 
 	 * @since    1.0.0
 	 */
-	public function anypostslider_update_settings() {
-		$status = 'false';
-		if(isset($_POST['aps_settings_save']) && 
-			( isset ($_POST['action']) == "aps_update_settings") &&
-			( isset( $_POST['anypostlsider_admin_options_nonce_field'] ) &&
-				wp_verify_nonce( $_POST['anypostlsider_admin_options_nonce_field'] ) && 
-				current_user_can('manage_options')
-			)
-		):
-			$aps_object  = new Any_Post_Slider();
-			$aps_options = $aps_object->aps_get_options();  
+	public function anypostslider_update_settings($any_post_slider_id,$any_post_slider) {
+		if ( $any_post_slider->post_type == 'any_post_slider' ) {
 
-			$aps_options['aps_no_post_display'] = (int)stripslashes($_POST['aps_no_post_display']);
+			$status = 'false';
+			if(isset( $_POST['aps_cpt_nonce'] ) &&
+				wp_verify_nonce( $_POST['aps_cpt_nonce'], 'aps_cpt_nonce')	
+			):
+				$aps_object  = new Any_Post_Slider();
+				$aps_options = $aps_object->aps_get_options();  
+				
+				$aps_options['aps_no_post_display'] = (int)stripslashes($_POST['aps_no_post_display']);
+				$aps_options['aps_post_types'] = sanitize_text_field($_POST['aps_pos_type']);
+				$aps_options['aps_display_layout'] = (int)stripslashes($_POST['aps_display_layout']);
+				$aps_options['aps_order_by'] = sanitize_text_field($_POST['aps_post_order']);
+				$aps_options['aps_mousewheel_scroll'] = sanitize_text_field($_POST['aps_mousewheel_scroll']);
+				$aps_options['aps_sliderarrows'] = sanitize_text_field($_POST['aps_sliderarrows']);
+				$aps_options['aps_sliderdots'] = sanitize_text_field($_POST['aps_sliderdots']);
+				$aps_options['aps_loop'] = sanitize_text_field($_POST['aps_loop']);
+				$aps_options['aps_sliderautoplay'] = sanitize_text_field($_POST['aps_sliderautoplay']);
+				$aps_options['aps_sliderspeed'] = sanitize_text_field($_POST['aps_sliderspeed']);
+				$aps_options['aps_equalheight'] = sanitize_text_field($_POST['aps_equalheight']);
+				$aps_options['aps_no_slide_display'] = (int)stripslashes($_POST['aps_no_slide_display']);
+				$aps_options['aps_shortcode_name'] = '[aps_slider slider_id='.$any_post_slider_id.']'; 
 
-			$aps_options['aps_post_types'] = sanitize_text_field($_POST['aps_pos_type']);
-
-			$aps_options['aps_display_layout'] = (int)stripslashes($_POST['aps_display_layout']);
-			
-			$aps_options['aps_order_by'] = sanitize_text_field($_POST['aps_post_order']);
-
-			$aps_options['aps_scroll_to_slide'] = (int)stripslashes($_POST['aps_scroll_to_slide']);
-			
-			$aps_options['aps_sliderarrows'] = sanitize_text_field($_POST['aps_sliderarrows']);
-			
-			$aps_options['aps_sliderdots'] = sanitize_text_field($_POST['aps_sliderdots']);
-			
-			$aps_options['aps_sliderautoplay'] = sanitize_text_field($_POST['aps_sliderautoplay']);
-			
-			$aps_options['aps_sliderspeed'] = sanitize_text_field($_POST['aps_sliderspeed']);
-			
-			$aps_options['aps_equalheight'] = sanitize_text_field($_POST['aps_equalheight']);
-
-			$aps_options['aps_no_slide_display'] = (int)stripslashes($_POST['aps_no_slide_display']);
-			
-			$response = update_option('anypostslider_options', $aps_options);
-			if($response):
-				$status = 'true';
+				// $response = update_post_meta('anypostslider_options', $aps_options);
+				foreach ( $aps_options as $aps_options_key => $aps_options_value ) {
+        				$response = update_post_meta( $any_post_slider_id, $aps_options_key, $aps_options_value );
+    			}
+				if($response):
+					$status = 'true';
+				endif;
+			else:
 			endif;
-		else:
-		endif;
-		wp_redirect(admin_url('admin.php?page=any-post-slider-settings&update-status=' . $status));
+		}
+
 	}
 	
 	/**
@@ -191,7 +238,7 @@ class Any_Post_Slider_Admin {
 	 * @since    1.0.0
 	 */
 	public function aps_settings_link( array $links ) {
-		$url = get_admin_url() . "admin.php?page=any-post-slider-settings";
+		$url = get_admin_url() . "edit.php?post_type=any_post_slider";
 		$settings_link = '<a href="' . $url . '">' . __('Settings', 'textdomain') . '</a>';
 		  	$links[] = $settings_link;
 		return $links;

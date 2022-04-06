@@ -14,8 +14,8 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Any Post Slider
- * Plugin URI:        https://www.itpathsolutions.com/
- * Description:       The perfect all-in-one responsive slider solution for WordPress.
+ * Plugin URI:        https://wordpress.org/plugins/any-post-slider/
+ * Description:       Responsive Slider Solution for Any Posts Of WordPress.
  * Version:           1.0.0
  * Author:            IT Path Solutions PVT LTD
  * Author URI:        https://www.itpathsolutions.com/
@@ -48,13 +48,6 @@ if (!defined('ANY_POST_SLIDER_PLUGIN_DIR'))
  */
 if (!defined('ANY_POST_SLIDER_PLUGIN_URL'))
     define('ANY_POST_SLIDER_PLUGIN_URL', plugin_dir_url(__FILE__));
-
-/**
- *  define ANY_POST_SLIDER_LOG_DIR log file path
- */
-if (!defined('ANY_POST_SLIDER_LOG_DIR')) {
-    define('ANY_POST_SLIDER_LOG_DIR', ABSPATH . 'wp-content/uploads/any-post-slider-logs/');
-}
 
 /**
  * The code that runs during plugin activation.
