@@ -15,8 +15,8 @@
  * @wordpress-plugin
  * Plugin Name:       Any Post Slider
  * Plugin URI:        https://wordpress.org/plugins/any-post-slider/
- * Description:       Responsive Slider Solution for Any Posts Of WordPress.
- * Version:           1.0.0
+ * Description:       Any Post Slider is the most powerful WordPress plugin to create sliders. Fully responsive and works with any WordPress theme. It creates amazing sliders for any post Types.
+ * Version:           1.0.1
  * Author:            IT Path Solutions PVT LTD
  * Author URI:        https://www.itpathsolutions.com/
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'ANY_POST_SLIDER_VERSION', '1.0.0' );
+define( 'ANY_POST_SLIDER_VERSION', '1.0.1' );
 
 /**
  *  define ANY_POST_SLIDER_PLUGIN_DIR constant for global use

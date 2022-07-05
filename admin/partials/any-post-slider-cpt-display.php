@@ -58,7 +58,7 @@
                 foreach($aps_get_all_post_type as $pos_type_key => $pos_type_val): 
                     $post_type_obj = get_post_type_object( $pos_type_val );
                 ?>
-                <input type="radio" name="aps_pos_type" id="<?php echo $pos_type_key;?>" value="<?php esc_attr_e( $pos_type_val, $text_domain ); ?>" <?php if($aps_options['aps_post_types'] == $pos_type_val){ esc_attr_e( 'checked', $text_domain ); }?>/><label for="<?php echo $pos_type_key;?>"> <?php esc_attr_e( $post_type_obj->labels->name, $text_domain ); ?></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="aps_pos_type" id="<?php esc_attr_e( $pos_type_key, $text_domain ); ?>" value="<?php esc_attr_e( $pos_type_val, $text_domain ); ?>" <?php if($aps_options['aps_post_types'] == $pos_type_val){ esc_attr_e( 'checked', $text_domain ); }?>/><label for="<?php esc_attr_e( $pos_type_key, $text_domain ); ?>"> <?php esc_attr_e( $post_type_obj->labels->name, $text_domain ); ?></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php endforeach; ?>
             </div>	
         </div>
@@ -72,9 +72,9 @@
                 </select>        
             </div>
             <div class="aps_style_output">
-                    <img class="aps_style_1" src="<?php echo plugins_url($text_domain);?>/admin/images/slider_style1.jpg" alt="img1" <?php echo ($aps_options['aps_display_layout'] == '1') ? '' : 'style="display:none"';?>>
-                    <img class="aps_style_2" src="<?php echo plugins_url($text_domain);?>/admin/images/slider_style2.jpg" alt="img2" <?php echo ($aps_options['aps_display_layout'] == '2') ? '' : 'style="display:none"';?>>
-                    <img class="aps_style_3" src="<?php echo plugins_url($text_domain);?>/admin/images/slider_style3.jpg" alt="img3" <?php echo ($aps_options['aps_display_layout'] == '3') ? '' : 'style="display:none"';?>>
+            <img class="aps_style_1" src="<?php echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style1.jpg'); ?>" alt="img1" <?php esc_attr_e(($aps_options['aps_display_layout'] == '1') ? '' : 'style="display:none"');?>>
+                    <img class="aps_style_2" src="<?php  echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style2.jpg'); ?>" alt="img2" <?php esc_attr_e(($aps_options['aps_display_layout'] == '2') ? '' : 'style="display:none"');?>>
+                    <img class="aps_style_3" src="<?php  echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style3.jpg'); ?>" alt="img3" <?php esc_attr_e(($aps_options['aps_display_layout'] == '3') ? '' : 'style="display:none"');?>>
                 </div>
         </div>
         <div class="aps_row">

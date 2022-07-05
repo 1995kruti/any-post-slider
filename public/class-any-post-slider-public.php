@@ -123,12 +123,12 @@ class Any_Post_Slider_Public {
 		if(isset($aps_attributes['slider_id']) && $aps_attributes['slider_id']){
 			    ob_start();
 				require(dirname(__FILE__) . '/partials/any-post-slider-public-display.php');
-		if($options['aps_mousewheel_scroll'] == 'yes'):
+				if($aps_attributes['aps_mousewheel_scroll'] == 'yes'):
 			wp_enqueue_script( 'any_post_slider_public_mouse_wheel_min', plugin_dir_url( __FILE__ ) . 'js/jquery.mousewheel.min.js', array( 'jquery' ), $this->version, true );
 		endif;
 		}
 		else{
-			echo 'Oops seems you entered incorrect Shortcode of Any Post Slider.';
+			esc_attr_e('Oops seems you entered incorrect Shortcode of Any Post Slider.');
 		}
 		return ob_get_clean();
 	}

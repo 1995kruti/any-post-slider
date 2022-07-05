@@ -1,7 +1,16 @@
 <!-- It will display featured image  & post title only-->
-<div class="app-slider-wrap <?php esc_attr_e(  'layout-'.$aps_carousal_arguments['display_layout'], $text_domain )?>">
+<div class="app-slider-wrap <?php esc_attr_e('layout-'.$aps_carousal_arguments['display_layout'], $text_domain )?>">
     <input type="hidden" class="display-layout" id="display-layout-id" value="<?php esc_attr_e(  $aps_carousal_arguments['display_slide'], $text_domain )?>"/>
-        <div class="owl-carousel owl-theme aps-slider" id="aps_slider_<?php echo $aps_attributes['slider_id']; ?>" data-id="<?php echo $aps_attributes['slider_id']; ?>"data-display_slide ="<?php echo $aps_carousal_arguments['display_slide']; ?>" data-aps_mousewheel_scroll ="<?php echo $aps_carousal_arguments['aps_mousewheel_scroll']; ?>" data-aps_sliderarrows ="<?php echo $aps_carousal_arguments['aps_sliderarrows']; ?>" data-aps_sliderdots ="<?php echo $aps_carousal_arguments['aps_sliderdots']; ?>" data-aps_loop ="<?php echo $aps_carousal_arguments['aps_loop']; ?>" data-aps_sliderautoplay ="<?php echo $aps_carousal_arguments['aps_sliderautoplay']; ?>" data-aps_sliderspeed ="<?php echo $aps_carousal_arguments['aps_sliderspeed']; ?>" data-aps_equalheight ="<?php echo $aps_carousal_arguments['aps_equalheight']; ?>" data-image = "<?php echo plugins_url($text_domain).'/public/images'; ?>" >
+        <div class="owl-carousel owl-theme aps-slider" 
+         id="aps_slider_<?php esc_attr_e( $aps_attributes['slider_id'], $text_domain ); ?>" 
+         data-id="<?php esc_attr_e( $aps_attributes['slider_id'], $text_domain ); ?>" 
+         data-display_slide="<?php esc_attr_e( $aps_carousal_arguments['display_slide'], $text_domain ); ?>" 
+         data-aps_mousewheel_scroll="<?php esc_attr_e( $aps_carousal_arguments['aps_mousewheel_scroll'], $text_domain ); ?>" data-aps_sliderarrows="<?php esc_attr_e( $aps_carousal_arguments['aps_sliderarrows'], $text_domain ); ?>" 
+         data-aps_sliderdots="<?php esc_attr_e( $aps_carousal_arguments['aps_sliderdots'], $text_domain ); ?>" 
+         data-aps_loop="<?php esc_attr_e( $aps_carousal_arguments['aps_loop'], $text_domain ); ?>" 
+         data-aps_sliderautoplay="<?php esc_attr_e( $aps_carousal_arguments['aps_sliderautoplay'], $text_domain ); ?>" data-aps_sliderspeed="<?php esc_attr_e( $aps_carousal_arguments['aps_sliderspeed'], $text_domain ); ?>" 
+         data-aps_equalheight="<?php esc_attr_e( $aps_carousal_arguments['aps_equalheight'], $text_domain ); ?>" 
+         data-image="<?php echo esc_url( plugins_url($text_domain).'/public/images'); ?>">
             
         <?php foreach($get_posts_data as $post_item_key => $post_item_val): ?>
         <div class="item">

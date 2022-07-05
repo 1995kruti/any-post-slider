@@ -46,7 +46,7 @@
     var aps_loop = jQuery(this).data('aps_loop');
     var aps_owl_slider = jQuery('.aps-slider');
 
-    console.log(aps_mousewheel_scroll);
+    
     // set slide arrow navigation param
     var aps_nav = true;
     var desktoparrow = false;

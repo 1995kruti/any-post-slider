@@ -48,6 +48,9 @@
 				 }
 			 });
 		 });
+
+
+
 		jQuery('#aps_style').on('change', function() {
 		  	if(this.value == 1){
 			    jQuery('.aps_style_output img').hide();
@@ -73,5 +76,9 @@
 
 
 	 });
+	 $(window).load(function() {
+		var selected_val = jQuery('#aps_style').val();
+	  $('#aps_style').val(selected_val).change();
+   });
 
 })( jQuery );
