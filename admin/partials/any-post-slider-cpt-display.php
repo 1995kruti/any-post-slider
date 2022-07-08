@@ -69,13 +69,17 @@
                     <option value="1" <?php if($aps_options['aps_display_layout'] == '1'){ _e("selected");}?>>Style 1</option>
                     <option value="2" <?php if($aps_options['aps_display_layout'] == '2'){ _e("selected");}?>>Style 2</option>
                     <option value="3" <?php if($aps_options['aps_display_layout'] == '3'){ _e("selected");}?>>Style 3</option>
+                    <option value="4" <?php if($aps_options['aps_display_layout'] == '4'){ _e("selected");}?>>Style 4</option>
+                    <option value="5" <?php if($aps_options['aps_display_layout'] == '5'){ _e("selected");}?>>Style 5</option>
                 </select>        
             </div>
             <div class="aps_style_output">
-            <img class="aps_style_1" src="<?php echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style1.jpg'); ?>" alt="img1" <?php esc_attr_e(($aps_options['aps_display_layout'] == '1') ? '' : 'style="display:none"');?>>
-                    <img class="aps_style_2" src="<?php  echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style2.jpg'); ?>" alt="img2" <?php esc_attr_e(($aps_options['aps_display_layout'] == '2') ? '' : 'style="display:none"');?>>
-                    <img class="aps_style_3" src="<?php  echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style3.jpg'); ?>" alt="img3" <?php esc_attr_e(($aps_options['aps_display_layout'] == '3') ? '' : 'style="display:none"');?>>
-                </div>
+                <img class="aps_style_1" src="<?php echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style1.jpg'); ?>" alt="img1" <?php esc_attr_e(($aps_options['aps_display_layout'] == '1') ? '' : 'style="display:none"');?>>
+                <img class="aps_style_2" src="<?php  echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style2.jpg'); ?>" alt="img2" <?php esc_attr_e(($aps_options['aps_display_layout'] == '2') ? '' : 'style="display:none"');?>>
+                <img class="aps_style_3" src="<?php  echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style3.jpg'); ?>" alt="img3" <?php esc_attr_e(($aps_options['aps_display_layout'] == '3') ? '' : 'style="display:none"');?>>
+                <img class="aps_style_4" src="<?php  echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style4.png'); ?>" alt="img4" <?php esc_attr_e(($aps_options['aps_display_layout'] == '4') ? '' : 'style="display:none"');?>>
+                <img class="aps_style_5" src="<?php  echo esc_url(plugins_url($text_domain) .'/admin/images/slider_style5.png'); ?>" alt="img5" <?php esc_attr_e(($aps_options['aps_display_layout'] == '5') ? '' : 'style="display:none"');?>>
+            </div>
         </div>
         <div class="aps_row">
             <div class="aps_row_name">Select Order:</div>

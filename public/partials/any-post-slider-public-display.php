@@ -93,6 +93,18 @@ if(isset($get_posts_data) && !is_admin() && !empty($get_posts_data)):
         require(dirname(__FILE__) . '/any-post-slider-layout_three.php');
         wp_reset_postdata();
         
+    elseif($aps_carousal_arguments['display_layout'] == 4):
+        
+        setup_postdata( $get_posts_data );
+        require(dirname(__FILE__) . '/any-post-slider-layout_four.php');
+        wp_reset_postdata();
+        
+    elseif($aps_carousal_arguments['display_layout'] == 5):
+        
+        setup_postdata( $get_posts_data );
+        require(dirname(__FILE__) . '/any-post-slider-layout_five.php');
+        wp_reset_postdata();
+        
     endif;
 else:
     setup_postdata( $aps_carousal_arguments );
